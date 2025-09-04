@@ -8,8 +8,8 @@ namespace FinalExamProject.Models
             : base(options)
         {
         }
-        public virtual DbSet<Members> Member { get; set; }
-        public virtual DbSet<Products> Product { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
 
     }
 }

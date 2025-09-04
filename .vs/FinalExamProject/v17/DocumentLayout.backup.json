@@ -1,14 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\FinalExamProject\\",
+  "WorkspaceRootPath": "G:\\MyProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\finalexamproject\\models\\memberaccounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\memberaccounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\emailverification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\emailverification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\finalexamproject\\models\\members.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\members.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\orderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +26,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MemberAccounts.cs",
-              "DocumentMoniker": "D:\\FinalExamProject\\Models\\MemberAccounts.cs",
-              "RelativeDocumentMoniker": "Models\\MemberAccounts.cs",
-              "ToolTip": "D:\\FinalExamProject\\Models\\MemberAccounts.cs",
-              "RelativeToolTip": "Models\\MemberAccounts.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA0wBkAAAA4AAAAAAAAAA==",
+              "Title": "EmailVerification.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\EmailVerification.cs",
+              "RelativeDocumentMoniker": "Models\\EmailVerification.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\EmailVerification.cs",
+              "RelativeToolTip": "Models\\EmailVerification.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T06:15:46.028Z",
+              "WhenOpened": "2025-09-04T06:35:25.407Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Members.cs",
-              "DocumentMoniker": "D:\\FinalExamProject\\Models\\Members.cs",
-              "RelativeDocumentMoniker": "Models\\Members.cs",
-              "ToolTip": "D:\\FinalExamProject\\Models\\Members.cs",
-              "RelativeToolTip": "Models\\Members.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "Title": "Category.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\Category.cs",
+              "RelativeDocumentMoniker": "Models\\Category.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\Category.cs",
+              "RelativeToolTip": "Models\\Category.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-03T03:47:08.201Z"
+              "WhenOpened": "2025-09-04T06:35:21.921Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderDetail.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\OrderDetail.cs",
+              "RelativeDocumentMoniker": "Models\\OrderDetail.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\OrderDetail.cs",
+              "RelativeToolTip": "Models\\OrderDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T06:30:08.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Order.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "Models\\Order.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\Order.cs",
+              "RelativeToolTip": "Models\\Order.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAkwCkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T03:30:20.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
             }
           ]
         }
