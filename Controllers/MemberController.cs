@@ -24,24 +24,6 @@ namespace FinalExamProject.Controllers
             return View(await _context.Member.ToListAsync());
         }
 
-        // GET: Member/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberID == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
-
-            return View(member);
-        }
-
         // GET: Member/Create
         public IActionResult Create()
         {
@@ -114,39 +96,6 @@ namespace FinalExamProject.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(member);
-        }
-
-        // GET: Member/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var member = await _context.Member
-                .FirstOrDefaultAsync(m => m.MemberID == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
-
-            return View(member);
-        }
-
-        // POST: Member/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var member = await _context.Member.FindAsync(id);
-            if (member != null)
-            {
-                _context.Member.Remove(member);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool MemberExists(Guid id)

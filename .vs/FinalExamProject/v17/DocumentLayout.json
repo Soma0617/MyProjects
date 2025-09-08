@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\MyProjects\\",
+  "WorkspaceRootPath": "G:\\MyProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\metadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\metadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:controllers\\membercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +30,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MemberController.cs",
-              "DocumentMoniker": "D:\\MyProjects\\Controllers\\MemberController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MemberController.cs",
-              "ToolTip": "D:\\MyProjects\\Controllers\\MemberController.cs",
-              "RelativeToolTip": "Controllers\\MemberController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAA0wAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Product.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T01:14:30.166Z",
+              "WhenOpened": "2025-09-08T07:47:01.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Member.cs",
-              "DocumentMoniker": "D:\\MyProjects\\Models\\Member.cs",
-              "RelativeDocumentMoniker": "Models\\Member.cs",
-              "ToolTip": "D:\\MyProjects\\Models\\Member.cs",
-              "RelativeToolTip": "Models\\Member.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "MetaData.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Models\\MetaData.cs",
+              "RelativeDocumentMoniker": "Models\\MetaData.cs",
+              "ToolTip": "G:\\MyProjects\\Models\\MetaData.cs",
+              "RelativeToolTip": "Models\\MetaData.cs",
+              "ViewState": "AgIAAKAAAAAAAAAAAAAIwGUAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-08T01:12:27.711Z"
+              "WhenOpened": "2025-09-08T02:40:30.319Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MemberController.cs",
+              "DocumentMoniker": "G:\\MyProjects\\Controllers\\MemberController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MemberController.cs",
+              "ToolTip": "G:\\MyProjects\\Controllers\\MemberController.cs",
+              "RelativeToolTip": "Controllers\\MemberController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T01:14:30.166Z",
+              "EditorCaption": ""
             }
           ]
         }

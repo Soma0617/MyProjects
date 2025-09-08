@@ -5,7 +5,6 @@ namespace FinalExamProject.Models
 {
     public class Product
     {
-        // 資料庫的主要主鍵 (內部用，不給商業邏輯用)
         [Key] 
         public Guid ProductID { get; set; } = Guid.NewGuid(); 
         
@@ -48,6 +47,6 @@ namespace FinalExamProject.Models
 
         public int CategoryID { get; set; }
 
-        public Category CategoryData { get; set; } = null!;
+        public Category CategoryInfo { get; set; } = null!;
     }
 }

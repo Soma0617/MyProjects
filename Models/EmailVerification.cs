@@ -13,7 +13,7 @@ namespace FinalExamProject.Models
         public Guid MemberID { get; set; }
 
         [ForeignKey("MemberID")]
-        public Member MemberData { get; set; } = null!;
+        public Member MemberInfo { get; set; } = null!;
 
         // 驗證碼（通常用隨機字串或 GUID 轉換）
         [Required]

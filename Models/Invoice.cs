@@ -12,7 +12,7 @@ namespace FinalExamProject.Models
         [Required]
         public Guid OrderID { get; set; }
         [ForeignKey(nameof(OrderID))]
-        public Order OrderData { get; set; } = null!;
+        public Order OrderInfo { get; set; } = null!;
 
         [Display(Name = "發票號碼")]
         [StringLength(20)]

@@ -18,7 +18,7 @@ namespace FinalExamProject.Models
         [Required]
         public Guid ProductID { get; set; }
         [ForeignKey(nameof(ProductID))]
-        public Product ProductData { get; set; } = null!;
+        public Product ProductInfo { get; set; } = null!;
 
         [Display(Name = "採購數量")]
         [Range(1, int.MaxValue, ErrorMessage = "數量必須大於0")]

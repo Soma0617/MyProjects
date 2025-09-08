@@ -12,7 +12,7 @@ namespace FinalExamProject.Models
         [Required]
         public Guid ProductID { get; set; }
         [ForeignKey(nameof(ProductID))]
-        public Product ProductData { get; set; } = null!;
+        public Product ProductInfo { get; set; } = null!;
 
         [Display(Name = "庫存數量")]
         [Range(0, int.MaxValue, ErrorMessage = "庫存數量不能小於0")]

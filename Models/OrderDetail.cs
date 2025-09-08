@@ -8,10 +8,10 @@ namespace FinalExamProject.Models
         public Guid OrderDetailID { get; set; } = Guid.NewGuid();
 
         public Guid OrderID { get; set; }
-        public Order OrderData { get; set; } = null!;
+        public Order OrderInfo { get; set; } = null!;
 
         public Guid ProductID { get; set; }
-        public Product ProductData { get; set; } = null!;
+        public Product ProductInfo { get; set; } = null!;
 
         [Display(Name = "數量")]
         [Range(1, int.MaxValue)]
