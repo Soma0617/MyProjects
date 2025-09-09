@@ -24,8 +24,5 @@ namespace FinalExamProject.Models
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
         public DateTime? LastLoginDate { get; set; }
-
-        // 一對一：一個會員對應一個帳號
-        public Account AccountInfo { get; set; } = null!;
     }
 }

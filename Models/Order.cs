@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalExamProject.Models
 {
@@ -9,6 +10,7 @@ namespace FinalExamProject.Models
         public string OrderNumber { get; set; } = null!;
 
         public Guid MemberID { get; set; }
+        [ForeignKey("MemberID")]
         public Member MemberInfo { get; set; } = null!;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;

@@ -12,7 +12,7 @@ namespace FinalExamProject.Models
         public string PasswordHash { get; set; } = null!;
 
         public Guid MemberID { get; set; }
-
+        [ForeignKey("MemberID")]
         public Member MemberInfo { get; set; } = null!;
     }
 }
