@@ -19,6 +19,7 @@ namespace FinalExamProject.Models
 
         public string? Address { get; set; }
 
+        public string Email { get; set; } = null!;
         public bool IsEmailConfirmed { get; set; } = false;
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;

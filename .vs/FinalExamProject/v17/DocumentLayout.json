@@ -1,17 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "G:\\MyProjects\\",
+  "WorkspaceRootPath": "D:\\MyProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\metadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\metadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\metadata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\member.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|g:\\myprojects\\models\\purchaseorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|d:\\myprojects\\models\\purchaseorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1FCDCA0-5603-4020-9DAC-D75CE690BF58}|FinalExamProject.csproj|solutionrelative:models\\purchaseorderdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,42 +38,64 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Report.cs",
-              "DocumentMoniker": "G:\\MyProjects\\Models\\Report.cs",
-              "RelativeDocumentMoniker": "Models\\Report.cs",
-              "ToolTip": "G:\\MyProjects\\Models\\Report.cs",
-              "RelativeToolTip": "Models\\Report.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T05:58:49.185Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PurchaseOrderDetail.cs",
-              "DocumentMoniker": "G:\\MyProjects\\Models\\PurchaseOrderDetail.cs",
-              "RelativeDocumentMoniker": "Models\\PurchaseOrderDetail.cs",
-              "ToolTip": "G:\\MyProjects\\Models\\PurchaseOrderDetail.cs",
-              "RelativeToolTip": "Models\\PurchaseOrderDetail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Title": "Member.cs",
+              "DocumentMoniker": "D:\\MyProjects\\Models\\Member.cs",
+              "RelativeDocumentMoniker": "Models\\Member.cs",
+              "ToolTip": "D:\\MyProjects\\Models\\Member.cs",
+              "RelativeToolTip": "Models\\Member.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAywBQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T03:38:43.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T02:21:43.715Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MetaData.cs",
-              "DocumentMoniker": "G:\\MyProjects\\Models\\MetaData.cs",
-              "RelativeDocumentMoniker": "Models\\MetaData.cs",
-              "ToolTip": "G:\\MyProjects\\Models\\MetaData.cs",
-              "RelativeToolTip": "Models\\MetaData.cs",
-              "ViewState": "AgIAAMIBAAAAAAAAAAAQwNkBAAA3AAAAAAAAAA==",
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "D:\\MyProjects\\Models\\SeedData.cs",
+              "RelativeDocumentMoniker": "Models\\SeedData.cs",
+              "ToolTip": "D:\\MyProjects\\Models\\SeedData.cs",
+              "RelativeToolTip": "Models\\SeedData.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAgwEUAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T03:37:19.624Z",
+              "WhenOpened": "2025-09-10T01:58:05.644Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Report.cs",
+              "DocumentMoniker": "D:\\MyProjects\\Models\\Report.cs",
+              "RelativeDocumentMoniker": "Models\\Report.cs",
+              "ToolTip": "D:\\MyProjects\\Models\\Report.cs",
+              "RelativeToolTip": "Models\\Report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T05:58:49.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PurchaseOrderDetail.cs",
+              "DocumentMoniker": "D:\\MyProjects\\Models\\PurchaseOrderDetail.cs",
+              "RelativeDocumentMoniker": "Models\\PurchaseOrderDetail.cs",
+              "ToolTip": "D:\\MyProjects\\Models\\PurchaseOrderDetail.cs",
+              "RelativeToolTip": "Models\\PurchaseOrderDetail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T03:38:43.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MetaData.cs",
+              "DocumentMoniker": "D:\\MyProjects\\Models\\MetaData.cs",
+              "RelativeDocumentMoniker": "Models\\MetaData.cs",
+              "ToolTip": "D:\\MyProjects\\Models\\MetaData.cs",
+              "RelativeToolTip": "Models\\MetaData.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAIwBoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T03:37:19.624Z"
             }
           ]
         }

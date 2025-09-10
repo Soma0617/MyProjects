@@ -24,7 +24,7 @@ namespace FinalExamProject.Models
         [Required]
         public string PasswordHash { get; set; } = null!;
 
-        [Display(Name = "角色")]
+        [Display(Name = "員工職稱")]
         [StringLength(20)]
         [Required]
         public string Role { get; set; } = "Staff";
@@ -69,6 +69,12 @@ namespace FinalExamProject.Models
         [Display(Name = "地址")]
         [StringLength(200, ErrorMessage = "地址最長 200 個字")]
         public string? Address { get; set; }
+
+        [Display(Name = "電子郵件")]
+        [StringLength(100)]
+        [EmailAddress]
+        [Required]
+        public string Email { get; set; } = null!;
 
         [Display(Name = "Email 驗證狀態")]
         public bool IsEmailConfirmed { get; set; } = false;
