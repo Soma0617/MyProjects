@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -92,15 +93,14 @@ namespace FinalExamProject.Models
     public class AccountData
     {
         [Key]
-        public int AccountID { get; set; }
-
         [Display(Name = "帳號 (Email)")]
         [EmailAddress]
         [Required]
-        public string Email { get; set; } = null!;
+        public string AccountID { get; set; } = null!;
 
         [Display(Name = "密碼")]
         [Required]
+        [PasswordPropertyText]
         public string PasswordHash { get; set; } = null!;
 
         [Display(Name = "會員編號")]
@@ -121,7 +121,7 @@ namespace FinalExamProject.Models
         public string VerificationCode { get; set; } = null!;
 
         [Required]
-        public DateTime ExpirationTime { get; set; }
+        public DateTime ExpirationTime { get; set; } // DateTime.Now.AddSeconds(180)
 
         [Required]
         public bool IsVerified { get; set; } = false;
@@ -213,7 +213,7 @@ namespace FinalExamProject.Models
         [Display(Name = "產品價格")]
         [Range(0.01, double.MaxValue, ErrorMessage = "價格需大於0")]
         [DataType(DataType.Currency)]
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } 
 
         [Display(Name = "是否上架")]
         public bool IsActive { get; set; } = true;

@@ -5,9 +5,7 @@ namespace FinalExamProject.Models
 {
     public class Account
     {
-        public int AccountID { get; set; }
-
-        public string Email { get; set; } = null!;
+        public string AccountID { get; set; } = null!;
 
         public string PasswordHash { get; set; } = null!;
 
