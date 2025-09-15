@@ -4,6 +4,7 @@ namespace FinalExamProject.Models
 {
     public class Admin
     {
+        [Key]
         public Guid AdminID { get; set; } = Guid.NewGuid();
 
         public string UserName { get; set; } = null!;

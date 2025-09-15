@@ -10,7 +10,7 @@ namespace FinalExamProject.Models
         {
             using (GoShopContext context = new GoShopContext(serviceProvider.GetRequiredService<DbContextOptions<GoShopContext>>()))
             {
-                if (!context.Member.Any())
+                // if (!context.Member.Any())
                 {
                     context.Admin.AddRange(
 
@@ -50,7 +50,8 @@ namespace FinalExamProject.Models
                         Address = "高雄市楠梓區",
                         IsEmailConfirmed = true,
                         CreatedDate = DateTime.Now,
-                        LastLoginDate = DateTime.Now
+                        LastLoginDate = DateTime.Now,
+                        Email = "12121125@gmail.com"
                     };
                     var Member2 = new Member
                     {
@@ -62,26 +63,30 @@ namespace FinalExamProject.Models
                         Address = "高雄市楠梓區",
                         IsEmailConfirmed = false,
                         CreatedDate = DateTime.Now,
-                        LastLoginDate = DateTime.Now
+                        LastLoginDate = DateTime.Now,
+                        Email = "12121125@gmail.com"
                     };
                     context.Member.AddRange(Member1, Member2);
                     context.SaveChanges();
 
-                    context.Account.AddRange(
-
-                        new Account
+                    if (!context.Account.Any(a => a.AccountID == "s102211037"))
+                    {
+                        context.Account.Add(new Account
                         {
                             AccountID = "s102211037",
                             PasswordHash = "sksdnhye",
                             MemberID = Member1.MemberID,
-                        },
-                        new Account
+                        });
+                    }
+                    if (!context.Account.Any(a => a.AccountID == "66255612"))
+                    {
+                        context.Account.Add(new Account
                         {
                             AccountID = "66255612",
                             PasswordHash = "5365hye",
                             MemberID = Member2.MemberID,
-                        }
-                    );
+                        });
+                    }
                     context.SaveChanges();
 
                     context.EmailVerification.AddRange(
@@ -136,7 +141,7 @@ namespace FinalExamProject.Models
                         PaymentMethod = "信用卡",
                         ShippingStatus = "Pending",
                         OrderStatus = "Active"
-                    );
+                    };
                     context.Order.AddRange(Order1, Order2);
                     context.SaveChanges();
 
@@ -238,67 +243,149 @@ namespace FinalExamProject.Models
                     );
                     context.SaveChanges();
 
+                    context.Invoice.AddRange(
 
+                        new Invoice
+                        {
+                            InvoiceID = Guid.NewGuid(),
+                            OrderID = Order1.OrderID,
+                            InvoiceNumber = "00000000000000000020",
+                            InvoiceDate = DateTime.Now,
+                            Amount = 120000,
+                            Tax = 600,
+                            TotalAmount = 126000,
+                            CreatedDate = DateTime.Now
+                        },
+                        new Invoice
+                        {
+                            InvoiceID = Guid.NewGuid(),
+                            OrderID = Order2.OrderID,
+                            InvoiceNumber = "00000000000000000021",
+                            InvoiceDate = DateTime.Now,
+                            Amount = 30000,
+                            Tax = 800,
+                            TotalAmount = 30800,
+                            CreatedDate = DateTime.Now
+                        }
 
+                    );
+                    context.SaveChanges();
 
+                    context.Payment.AddRange(
 
+                        new Payment
+                        {
+                            PaymentID = Guid.NewGuid(),
+                            OrderID = Order1.OrderID,
+                            PaymentMethod = "到貨後60天",
+                            TotalAmount = 120600,
+                            PaymentDate = DateTime.Now,
+                            Status = "Pending",
+                            TransactionID = "451324512",
+                            CreatedDate = DateTime.Now
+                        },
+                        new Payment
+                        {
+                            PaymentID = Guid.NewGuid(),
+                            OrderID = Order2.OrderID,
+                            PaymentMethod = "到貨後30天",
+                            TotalAmount = 120600,
+                            PaymentDate = DateTime.Now,
+                            Status = "Pending",
+                            TransactionID = "86224512",
+                            CreatedDate = DateTime.Now
+                        }
+                    );
+                    context.SaveChanges();
 
+                    context.Inventory.AddRange(
 
-                    [Key]
-                    public Guid InvoiceID { get; set; } = Guid.NewGuid();
+                        new Inventory
+                        {
+                            InventoryID = Guid.NewGuid(),
+                            ProductID = Product1.ProductID,
+                            Quantity = 20,
+                            SafetyStock = 15,
+                            LastUpdated = DateTime.Now
+                        },
+                        new Inventory
+                        {
+                            InventoryID = Guid.NewGuid(),
+                            ProductID = Product2.ProductID,
+                            Quantity = 4200,
+                            SafetyStock = 800,
+                            LastUpdated = DateTime.Now
+                        }
+                    );
+                    context.SaveChanges();
 
-                    [Required]
-                    public Guid OrderID { get; set; }
-
-                    [Display(Name = "發票號碼")]
-                    [StringLength(20)]
-                    [Required(ErrorMessage = "必填欄位")]
-                    public string InvoiceNumber { get; set; } = null!;
-
-                    [Display(Name = "發票日期")]
-                    [DataType(DataType.Date)]
-                    [Required]
-                    public DateTime InvoiceDate { get; set; } = DateTime.Now;
-
-                    [Display(Name = "金額")]
-                    [Range(0.01, double.MaxValue, ErrorMessage = "金額需大於0")]
-                    [DataType(DataType.Currency)]
-                    public decimal Amount { get; set; }
-
-                    [Display(Name = "稅額")]
-                    [Range(0, double.MaxValue)]
-                    public decimal Tax { get; set; }
-
-                    [Display(Name = "總金額")]
-                    [Range(0.01, double.MaxValue, ErrorMessage = "總金額需大於0")]
-                    [DataType(DataType.Currency)]
-                    public decimal TotalAmount { get; set; }
-
-                    [Display(Name = "建立時間")]
-                    public DateTime CreatedDate { get; set; } = DateTime.Now;
-
-
-
-
-
-
-
-                    //(3)撰寫上傳圖片的程式
-                    string SeedPhotosPath = Path.Combine(Directory.GetCurrentDirectory(), "SeedPhotos");//取得來源照片路徑
-                    string BookPhotosPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "BookPhotos");//取得目的路徑
-
-
-                    string[] files = Directory.GetFiles(SeedPhotosPath);  //取得指定路徑中的所有檔案
-
-                    for (int i = 0; i < files.Length; i++)
+                    var PurchaseOrder1 = new PurchaseOrder
                     {
-                        string destFile = Path.Combine(BookPhotosPath, guid[i] + ".jpg");
+                        PurchaseOrderID = Guid.NewGuid(),
+                        PurchaseOrderCode = "00000000000000000030",
+                        SupplierName = "ABC.LTD.",
+                        Status = "Pending",
+                        CreatedDate = DateTime.Now,
+                        UpdatedDate = DateTime.Now
+                    };
+                    var PurchaseOrder2 = new PurchaseOrder
+                    {
+                        PurchaseOrderID = Guid.NewGuid(),
+                        PurchaseOrderCode = "00000000000000000050",
+                        SupplierName = "ABC.LTD.",
+                        Status = "Pending",
+                        CreatedDate = DateTime.Now,
+                        UpdatedDate = DateTime.Now
+                    };
+                    context.PurchaseOrder.AddRange(PurchaseOrder1, PurchaseOrder2);
+                    context.SaveChanges();
 
 
-                        File.Copy(files[i], destFile);
-                    }
+                    context.PurchaseOrderDetail.AddRange(
+
+                        new PurchaseOrderDetail
+                        {
+                            PurchaseOrderDetailID = Guid.NewGuid(),
+                            PurchaseOrderID = PurchaseOrder1.PurchaseOrderID,
+                            ProductID = Product1.ProductID,
+                            Quantity = 40,
+                            UnitPrice = 16000,
+                        },
+                        new PurchaseOrderDetail
+                        {
+                            PurchaseOrderDetailID = Guid.NewGuid(),
+                            PurchaseOrderID = PurchaseOrder2.PurchaseOrderID,
+                            ProductID = Product2.ProductID,
+                            Quantity = 50,
+                            UnitPrice = 30000,
+                        }
+                    );
+                    context.SaveChanges();
+
+                    context.Report.AddRange(
+
+                        new Report
+                        {
+                            ReportID = Guid.NewGuid(),
+                            ReportName = "應收帳款報表",
+                            ReportType = "財務",
+                            Content = "今天100000-52000",
+                            CreatedBy = "SomaNN",
+                            CreatedDate = DateTime.Now
+                        },
+                        new Report
+                        {
+                            ReportID = Guid.NewGuid(),
+                            ReportName = "應收帳款報表",
+                            ReportType = "財務",
+                            Content = "今天100000-52000",
+                            CreatedBy = "SomaNN",
+                            CreatedDate = DateTime.Now
+                        }
+                    );
+                    context.SaveChanges();
                 }
-            } //using結束
+            }
         }
     }
 }

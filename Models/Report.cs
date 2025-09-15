@@ -4,6 +4,7 @@ namespace FinalExamProject.Models
 {
     public class Report
     {
+        [Key]
         public Guid ReportID { get; set; } = Guid.NewGuid();
 
         public string ReportName { get; set; } = null!;

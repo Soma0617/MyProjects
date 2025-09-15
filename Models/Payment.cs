@@ -5,6 +5,7 @@ namespace FinalExamProject.Models
 {
     public class Payment
     {
+        [Key]
         public Guid PaymentID { get; set; } = Guid.NewGuid();
 
         public Guid OrderID { get; set; }
@@ -13,7 +14,7 @@ namespace FinalExamProject.Models
 
         public string PaymentMethod { get; set; } = null!;
 
-        public decimal Amount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         public DateTime PaymentDate { get; set; } = DateTime.Now;
 

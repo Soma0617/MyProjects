@@ -6,6 +6,7 @@ namespace FinalExamProject.Models
 {
     public class Product
     {
+        [Key]
         public Guid ProductID { get; set; } = Guid.NewGuid(); 
 
         public string ProductCode { get; set; } = null!; 

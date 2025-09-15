@@ -374,7 +374,7 @@ namespace FinalExamProject.Models
         [Display(Name = "付款金額")]
         [Range(0.01, double.MaxValue, ErrorMessage = "付款金額需大於0")]
         [DataType(DataType.Currency)]
-        public decimal Amount { get; set; }
+        public decimal TotalAmount { get; set; }
 
         [Display(Name = "付款日期")]
         [DataType(DataType.DateTime)]

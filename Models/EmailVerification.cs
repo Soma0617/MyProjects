@@ -5,6 +5,7 @@ namespace FinalExamProject.Models
 {
     public class EmailVerification
     {
+        [Key]
         public Guid VerificationID { get; set; } = Guid.NewGuid();
 
         public Guid MemberID { get; set; }

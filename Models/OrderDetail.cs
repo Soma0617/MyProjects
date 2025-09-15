@@ -5,6 +5,7 @@ namespace FinalExamProject.Models
 {
     public class OrderDetail
     {
+        [Key]
         public Guid OrderDetailID { get; set; } = Guid.NewGuid();
 
         public Guid OrderID { get; set; }

@@ -5,6 +5,7 @@ namespace FinalExamProject.Models
 {
     public class Inventory
     {
+        [Key]
         public Guid InventoryID { get; set; } = Guid.NewGuid();
 
         public Guid ProductID { get; set; }

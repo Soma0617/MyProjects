@@ -7,6 +7,7 @@ namespace FinalExamProject.Models
 {
     public class Member
     {
+        [Key]
         public Guid MemberID { get; set; } = Guid.NewGuid();
 
         public string Name { get; set; } = null!;
