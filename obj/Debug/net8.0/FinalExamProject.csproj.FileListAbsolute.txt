@@ -521,7 +521,6 @@ G:\MyProjects\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.EntityF
 G:\MyProjects\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll
 G:\MyProjects\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 G:\MyProjects\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
-G:\MyProjects\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 G:\MyProjects\bin\Debug\net8.0\Mono.TextTemplating.dll
 G:\MyProjects\bin\Debug\net8.0\Newtonsoft.Json.dll
 G:\MyProjects\bin\Debug\net8.0\NuGet.Common.dll
@@ -542,7 +541,6 @@ G:\MyProjects\bin\Debug\net8.0\System.Composition.Runtime.dll
 G:\MyProjects\bin\Debug\net8.0\System.Composition.TypedParts.dll
 G:\MyProjects\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 G:\MyProjects\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
-G:\MyProjects\bin\Debug\net8.0\System.Drawing.Common.dll
 G:\MyProjects\bin\Debug\net8.0\System.Formats.Asn1.dll
 G:\MyProjects\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 G:\MyProjects\bin\Debug\net8.0\System.IO.Pipelines.dll
@@ -550,10 +548,8 @@ G:\MyProjects\bin\Debug\net8.0\System.Memory.Data.dll
 G:\MyProjects\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
 G:\MyProjects\bin\Debug\net8.0\System.Runtime.Caching.dll
 G:\MyProjects\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-G:\MyProjects\bin\Debug\net8.0\System.Security.Permissions.dll
 G:\MyProjects\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 G:\MyProjects\bin\Debug\net8.0\System.Text.Json.dll
-G:\MyProjects\bin\Debug\net8.0\System.Windows.Extensions.dll
 G:\MyProjects\bin\Debug\net8.0\af\Humanizer.resources.dll
 G:\MyProjects\bin\Debug\net8.0\ar\Humanizer.resources.dll
 G:\MyProjects\bin\Debug\net8.0\az\Humanizer.resources.dll
@@ -712,12 +708,8 @@ G:\MyProjects\bin\Debug\net8.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.
 G:\MyProjects\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 G:\MyProjects\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 G:\MyProjects\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
-G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
-G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 G:\MyProjects\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
-G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 G:\MyProjects\obj\Debug\net8.0\FinalExamProject.csproj.AssemblyReference.cache
 G:\MyProjects\obj\Debug\net8.0\rpswa.dswa.cache.json
 G:\MyProjects\obj\Debug\net8.0\FinalExamProject.GeneratedMSBuildEditorConfig.editorconfig
