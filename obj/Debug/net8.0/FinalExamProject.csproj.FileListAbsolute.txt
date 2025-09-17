@@ -737,3 +737,11 @@ G:\MyProjects\obj\Debug\net8.0\refint\FinalExamProject.dll
 G:\MyProjects\obj\Debug\net8.0\FinalExamProject.pdb
 G:\MyProjects\obj\Debug\net8.0\FinalExamProject.genruntimeconfig.cache
 G:\MyProjects\obj\Debug\net8.0\ref\FinalExamProject.dll
+G:\MyProjects\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+G:\MyProjects\bin\Debug\net8.0\System.Drawing.Common.dll
+G:\MyProjects\bin\Debug\net8.0\System.Security.Permissions.dll
+G:\MyProjects\bin\Debug\net8.0\System.Windows.Extensions.dll
+G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\Microsoft.Win32.SystemEvents.dll
+G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
+G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
+G:\MyProjects\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll

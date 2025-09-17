@@ -9,22 +9,22 @@ using FinalExamProject.Models;
 
 namespace FinalExamProject.Controllers
 {
-    public class AdminController : Controller
+    public class AdminsController : Controller
     {
         private readonly GoShopContext _context;
 
-        public AdminController(GoShopContext context)
+        public AdminsController(GoShopContext context)
         {
             _context = context;
         }
 
-        // GET: Admin
+        // GET: Admins
         public async Task<IActionResult> Index()
         {
             return View(await _context.Admin.ToListAsync());
         }
 
-        // GET: Admin/Details/5
+        // GET: Admins/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -42,23 +42,22 @@ namespace FinalExamProject.Controllers
             return View(admin);
         }
 
-        // GET: Admin/Create
+        // GET: Admins/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Create
+        // POST: Admins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserName,Email,PasswordHash,Role,IsActive,CreatedDate,LastLoginDate")] Admin admin)
+        public async Task<IActionResult> Create([Bind("AdminID,UserName,Email,PasswordHash,Role,IsActive,CreatedDate,LastLoginDate")] Admin admin)
         {
             if (ModelState.IsValid)
             {
                 admin.AdminID = Guid.NewGuid();
-                admin.CreatedDate = DateTime.Now;
                 _context.Add(admin);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -66,7 +65,7 @@ namespace FinalExamProject.Controllers
             return View(admin);
         }
 
-        // GET: Admin/Edit/5
+        // GET: Admins/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -82,12 +81,12 @@ namespace FinalExamProject.Controllers
             return View(admin);
         }
 
-        // POST: Admin/Edit/5
+        // POST: Admins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("UserName,Email,PasswordHash,Role,IsActive,CreatedDate,LastLoginDate")] Admin admin)
+        public async Task<IActionResult> Edit(Guid id, [Bind("AdminID,UserName,Email,PasswordHash,Role,IsActive,CreatedDate,LastLoginDate")] Admin admin)
         {
             if (id != admin.AdminID)
             {
@@ -117,7 +116,7 @@ namespace FinalExamProject.Controllers
             return View(admin);
         }
 
-        // GET: Admin/Delete/5
+        // GET: Admins/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -135,7 +134,7 @@ namespace FinalExamProject.Controllers
             return View(admin);
         }
 
-        // POST: Admin/Delete/5
+        // POST: Admins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)

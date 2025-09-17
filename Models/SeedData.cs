@@ -10,7 +10,7 @@ namespace FinalExamProject.Models
         {
             using (GoShopContext context = new GoShopContext(serviceProvider.GetRequiredService<DbContextOptions<GoShopContext>>()))
             {
-                // if (!context.Member.Any())
+                if (!context.Member.Any())
                 {
                     context.Admin.AddRange(
 

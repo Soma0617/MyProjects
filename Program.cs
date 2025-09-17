@@ -9,13 +9,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GoShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GoShopConnection")));
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -31,6 +36,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     SeedData.Initialize(services);
 }
+
 app.Run();
 
 
