@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using FinalExamProject.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GoShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GoShopConnection")));
 
-
+// ✅ 在這裡設定 HTTPS 轉導要用的埠（換成你的 https 埠號）
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.HttpsPort = 7143;   // ← 改成你的 https 埠
+});
 
 var app = builder.Build();
 
@@ -20,11 +24,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// ✅ 這裡用無參數版本
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -38,5 +42,3 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
-
-

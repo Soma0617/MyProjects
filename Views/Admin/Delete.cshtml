@@ -1,0 +1,31 @@
+﻿@model FinalExamProject.Models.Admin
+@{
+    ViewData["Title"] = "刪除 Admin";
+}
+
+<h2 class="mb-3 text-danger">刪除確認</h2>
+
+<h4>你確定要刪除這筆 Admin 資料嗎？</h4>
+
+<div class="mb-3">
+    <dl class="row">
+        <dt class="col-sm-3">使用者名稱</dt>
+        <dd class="col-sm-9">@Model.UserName</dd>
+
+        <dt class="col-sm-3">電子郵件</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">角色</dt>
+        <dd class="col-sm-9">@Model.Role</dd>
+
+        <dt class="col-sm-3">狀態</dt>
+        <dd class="col-sm-9">@(Model.IsActive ? "啟用" : "停用")</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="AdminID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

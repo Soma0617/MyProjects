@@ -1,0 +1,31 @@
+﻿@model FinalExamProject.Models.Admin
+@{
+    ViewData["Title"] = "Admin 詳細";
+}
+
+<h2 class="mb-3">Admin 詳細</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">使用者名稱</dt>
+    <dd class="col-sm-9">@Model.UserName</dd>
+
+    <dt class="col-sm-3">電子郵件</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">員工職稱</dt>
+    <dd class="col-sm-9">@Model.Role</dd>
+
+    <dt class="col-sm-3">帳號是否啟用</dt>
+    <dd class="col-sm-9">@(Model.IsActive ? "啟用" : "停用")</dd>
+
+    <dt class="col-sm-3">建立時間</dt>
+    <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm:ss")</dd>
+
+    <dt class="col-sm-3">最後登入時間</dt>
+    <dd class="col-sm-9">@Model.LastLoginDate?.ToString("yyyy/MM/dd HH:mm:ss")</dd>
+</dl>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.AdminID" class="btn btn-primary">編輯</a>
+    <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+</div>

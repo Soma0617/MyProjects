@@ -8,7 +8,7 @@ namespace FinalExamProject.Models
     public class AdminData
     {
         [Key]
-        public Guid AdminID { get; set; } = Guid.NewGuid();
+        public Guid AdminID { get; set; }
 
         [Display(Name = "使用者名稱")]
         [StringLength(50)]
@@ -23,6 +23,7 @@ namespace FinalExamProject.Models
 
         [Display(Name = "密碼")]
         [Required]
+        [DataType(DataType.Password)]
         public string PasswordHash { get; set; } = null!;
 
         [Display(Name = "員工職稱")]
@@ -31,10 +32,10 @@ namespace FinalExamProject.Models
         public string Role { get; set; } = "Staff";
 
         [Display(Name = "帳號是否啟用")]
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
 
         [Display(Name = "建立時間")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "最後登入時間")]
         public DateTime? LastLoginDate { get; set; }
@@ -43,10 +44,9 @@ namespace FinalExamProject.Models
     public class MemberData
     {
         [Display(Name = "會員編號")]
-        [StringLength(36, MinimumLength = 36)]
         [Key]
         [HiddenInput]
-        public Guid MemberID { get; set; } = Guid.NewGuid();
+        public Guid MemberID { get; set; }
 
         [Display(Name = "姓名")]
         [Required(ErrorMessage = "姓名為必填欄位")]
@@ -78,12 +78,12 @@ namespace FinalExamProject.Models
         public string Email { get; set; } = null!;
 
         [Display(Name = "Email 驗證狀態")]
-        public bool IsEmailConfirmed { get; set; } = false;
+        public bool IsEmailConfirmed { get; set; }
 
         [Display(Name = "註冊日期")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "最後登入時間")]
         [DataType(DataType.DateTime)]
@@ -100,7 +100,7 @@ namespace FinalExamProject.Models
 
         [Display(Name = "密碼")]
         [Required]
-        [PasswordPropertyText]
+        [DataType(DataType.Password)]
         public string PasswordHash { get; set; } = null!;
 
         [Display(Name = "會員編號")]
@@ -111,7 +111,7 @@ namespace FinalExamProject.Models
     public class EmailVerificationData
     {
         [Key]
-        public Guid VerificationID { get; set; } = Guid.NewGuid();
+        public Guid VerificationID { get; set; }
 
         [Required]
         public Guid MemberID { get; set; }
@@ -121,19 +121,19 @@ namespace FinalExamProject.Models
         public string VerificationCode { get; set; } = null!;
 
         [Required]
-        public DateTime ExpirationTime { get; set; } // DateTime.Now.AddSeconds(180)
+        public DateTime ExpirationTime { get; set; }
 
         [Required]
-        public bool IsVerified { get; set; } = false;
+        public bool IsVerified { get; set; }
 
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
     }
 
     public class OrderData
     {
         [Key]
-        public Guid OrderID { get; set; } = Guid.NewGuid();
+        public Guid OrderID { get; set; }
 
         [Display(Name = "訂單編號")]
         [StringLength(12, MinimumLength = 12)]
@@ -146,12 +146,12 @@ namespace FinalExamProject.Models
         [Display(Name = "建立時間")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "最後更新時間")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
-        public DateTime UpdatedDate { get; set; } = DateTime.Now;
+        public DateTime UpdatedDate { get; set; }
 
         [Display(Name = "收件人姓名")]
         [StringLength(20)]
@@ -189,7 +189,7 @@ namespace FinalExamProject.Models
     public class ProductData
     {
         [Key]
-        public Guid ProductID { get; set; } = Guid.NewGuid();
+        public Guid ProductID { get; set; }
 
         [Required]
         [StringLength(5, MinimumLength = 5)]
@@ -213,21 +213,21 @@ namespace FinalExamProject.Models
         [Display(Name = "產品價格")]
         [Range(0.01, double.MaxValue, ErrorMessage = "價格需大於0")]
         [DataType(DataType.Currency)]
-        public decimal Price { get; set; } 
+        public decimal Price { get; set; }
 
         [Display(Name = "是否上架")]
-        public bool IsActive { get; set; } = true;
+        public bool IsActive { get; set; }
 
         [Display(Name = "發布時間")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
         [HiddenInput]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "最後更新時間")]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}")]
-        public DateTime UpdatedDate { get; set; } = DateTime.Now;
+        public DateTime UpdatedDate { get; set; }
 
         public int CategoryID { get; set; }
     }
@@ -249,7 +249,7 @@ namespace FinalExamProject.Models
     public class OrderDetailData
     {
         [Key]
-        public Guid OrderDetailID { get; set; } = Guid.NewGuid();
+        public Guid OrderDetailID { get; set; }
 
         public Guid OrderID { get; set; }
 
@@ -267,13 +267,13 @@ namespace FinalExamProject.Models
 
         [Display(Name = "小計")]
         [Required]
-        public decimal Subtotal => Quantity * UnitPrice;
+        public decimal Subtotal { get; set; } // ⚠ 實體要加 [NotMapped]
     }
 
     public class ShippingData
     {
         [Key]
-        public Guid ShippingID { get; set; } = Guid.NewGuid();
+        public Guid ShippingID { get; set; }
 
         [Required]
         public Guid OrderID { get; set; }
@@ -304,7 +304,7 @@ namespace FinalExamProject.Models
 
         [Display(Name = "出貨日期")]
         [DataType(DataType.DateTime)]
-        public DateTime ShippedDate { get; set; } = DateTime.Now;
+        public DateTime ShippedDate { get; set; }
 
         [Display(Name = "預計送達日期")]
         [DataType(DataType.DateTime)]
@@ -319,13 +319,13 @@ namespace FinalExamProject.Models
         public string Status { get; set; } = "Processing";
 
         [Display(Name = "建立時間")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
     }
 
     public class InvoiceData
     {
         [Key]
-        public Guid InvoiceID { get; set; } = Guid.NewGuid();
+        public Guid InvoiceID { get; set; }
 
         [Required]
         public Guid OrderID { get; set; }
@@ -338,7 +338,7 @@ namespace FinalExamProject.Models
         [Display(Name = "發票日期")]
         [DataType(DataType.Date)]
         [Required]
-        public DateTime InvoiceDate { get; set; } = DateTime.Now;
+        public DateTime InvoiceDate { get; set; }
 
         [Display(Name = "金額")]
         [Range(0.01, double.MaxValue, ErrorMessage = "金額需大於0")]
@@ -355,13 +355,13 @@ namespace FinalExamProject.Models
         public decimal TotalAmount { get; set; }
 
         [Display(Name = "建立時間")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
     }
 
     public class PaymentData
     {
         [Key]
-        public Guid PaymentID { get; set; } = Guid.NewGuid();
+        public Guid PaymentID { get; set; }
 
         [Required]
         public Guid OrderID { get; set; }
@@ -378,7 +378,7 @@ namespace FinalExamProject.Models
 
         [Display(Name = "付款日期")]
         [DataType(DataType.DateTime)]
-        public DateTime PaymentDate { get; set; } = DateTime.Now;
+        public DateTime PaymentDate { get; set; }
 
         [Display(Name = "付款狀態")]
         [StringLength(20)]
@@ -389,13 +389,13 @@ namespace FinalExamProject.Models
         public string? TransactionID { get; set; }
 
         [Display(Name = "建立時間")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
     }
 
     public class InventoryData
     {
         [Key]
-        public Guid InventoryID { get; set; } = Guid.NewGuid();
+        public Guid InventoryID { get; set; }
 
         [Required]
         public Guid ProductID { get; set; }
@@ -409,13 +409,13 @@ namespace FinalExamProject.Models
         public int SafetyStock { get; set; }
 
         [Display(Name = "最後更新時間")]
-        public DateTime LastUpdated { get; set; } = DateTime.Now;
+        public DateTime LastUpdated { get; set; }
     }
 
     public class PurchaseOrderData
     {
         [Key]
-        public Guid PurchaseOrderID { get; set; } = Guid.NewGuid();
+        public Guid PurchaseOrderID { get; set; }
 
         [Display(Name = "採購單號")]
         [Required]
@@ -434,7 +434,7 @@ namespace FinalExamProject.Models
 
         [Display(Name = "建立時間")]
         [Required]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "更新時間")]
         public DateTime? UpdatedDate { get; set; }
@@ -443,7 +443,7 @@ namespace FinalExamProject.Models
     public class PurchaseOrderDetailData
     {
         [Key]
-        public Guid PurchaseOrderDetailID { get; set; } = Guid.NewGuid();
+        public Guid PurchaseOrderDetailID { get; set; }
 
         public Guid PurchaseOrderID { get; set; }
 
@@ -461,13 +461,13 @@ namespace FinalExamProject.Models
 
         [Display(Name = "小計")]
         [Required]
-        public decimal Subtotal => Quantity * UnitPrice;
+        public decimal Subtotal { get; set; } // ⚠ 實體要加 [NotMapped]
     }
 
     public class ReportData
     {
         [Key]
-        public Guid ReportID { get; set; } = Guid.NewGuid();
+        public Guid ReportID { get; set; }
 
         [Display(Name = "報表名稱")]
         [StringLength(50)]
@@ -488,6 +488,6 @@ namespace FinalExamProject.Models
         public string CreatedBy { get; set; } = null!;
 
         [Display(Name = "建立時間")]
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; }
     }
 }
