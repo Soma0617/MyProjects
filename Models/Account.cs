@@ -10,7 +10,10 @@ namespace FinalExamProject.Models
 
         public string PasswordHash { get; set; } = null!;
 
+        // 外鍵
         public Guid MemberID { get; set; }
+
+        // ✅ 單一導航屬性
         [ForeignKey("MemberID")]
         public Member MemberInfo { get; set; } = null!;
     }

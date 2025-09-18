@@ -1,0 +1,55 @@
+﻿@model FinalExamProject.Models.EmailVerification
+@{
+    ViewData["Title"] = "驗證碼詳細";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">驗證碼詳細</h2>
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">驗證碼</dt>
+                <dd class="col-sm-9 fw-semibold">@Model.VerificationCode</dd>
+
+                <dt class="col-sm-3">會員</dt>
+                <dd class="col-sm-9">
+                    @if (Model.MemberInfo is not null)
+                    {
+                        <div class="d-flex flex-column">
+                            <span>@Model.MemberInfo.Name</span>
+                            <small class="text-muted">@Model.MemberInfo.Email</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">未連結會員</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">到期時間</dt>
+                <dd class="col-sm-9">@Model.ExpirationTime.ToString("yyyy/MM/dd HH:mm")</dd>
+
+                <dt class="col-sm-3">狀態</dt>
+                <dd class="col-sm-9">
+                    @if (Model.IsVerified)
+                    {
+                        <span class="badge bg-success">已驗證</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">未驗證</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">建立時間</dt>
+                <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+            </dl>
+        </div>
+
+        <div class="card-footer d-flex gap-2">
+            <a asp-action="Edit" asp-route-id="@Model.VerificationID" class="btn btn-primary">編輯</a>
+            <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+        </div>
+    </div>
+</div>

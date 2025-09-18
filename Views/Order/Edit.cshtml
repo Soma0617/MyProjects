@@ -1,0 +1,112 @@
+﻿@model FinalExamProject.Models.OrderEditVm
+@using FinalExamProject.Models
+@{
+    ViewData["Title"] = "編輯訂單";
+    var members = ViewBag.Members as IEnumerable<Member> ?? Enumerable.Empty<Member>();
+    var memberOptions = members.Select(m => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+    {
+        Value = m.MemberID.ToString(),
+        Text = $"{m.Name} ({m.Email})",
+        Selected = (m.MemberID == Model.MemberID)
+    }).ToList();
+
+    string[] paymentOptions = new[] { "Unpaid", "Paid", "Refunded" };
+    string[] shippingOptions = new[] { "Pending", "Shipped", "Delivered", "Returned" };
+    string[] orderStatusOptions = new[] { "Active", "Cancelled", "Completed" };
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">編輯訂單</h2>
+
+    <form asp-action="Edit" method="post" class="card">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="OrderID" />
+
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="OrderNumber" class="form-label"></label>
+                    <input asp-for="OrderNumber" class="form-control" />
+                    <div class="form-text">12 碼（例如 yyyyMMddHHmm）。</div>
+                    <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-8">
+                    <label asp-for="MemberID" class="form-label">會員</label>
+                    <select asp-for="MemberID" class="form-select"
+                            asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(memberOptions, "Value", "Text"))">
+                    </select>
+                    <span asp-validation-for="MemberID" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="RecipientName" class="form-label"></label>
+                    <input asp-for="RecipientName" class="form-control" />
+                    <span asp-validation-for="RecipientName" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="RecipientPhone" class="form-label"></label>
+                    <input asp-for="RecipientPhone" class="form-control" />
+                    <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="PaymentMethod" class="form-label"></label>
+                    <input asp-for="PaymentMethod" class="form-control" placeholder="信用卡 / 貨到付款 / 轉帳..." />
+                    <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="RecipientAddress" class="form-label"></label>
+                    <input asp-for="RecipientAddress" class="form-control" />
+                    <span asp-validation-for="RecipientAddress" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="PaymentStatus" class="form-label"></label>
+                    <select asp-for="PaymentStatus" class="form-select">
+                        @foreach (var opt in paymentOptions)
+                        {
+                            <option value="@opt" selected="@(Model.PaymentStatus == opt)">@opt</option>
+                        }
+                    </select>
+                    <span asp-validation-for="PaymentStatus" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="ShippingStatus" class="form-label"></label>
+                    <select asp-for="ShippingStatus" class="form-select">
+                        @foreach (var opt in shippingOptions)
+                        {
+                            <option value="@opt" selected="@(Model.ShippingStatus == opt)">@opt</option>
+                        }
+                    </select>
+                    <span asp-validation-for="ShippingStatus" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4">
+                    <label asp-for="OrderStatus" class="form-label"></label>
+                    <select asp-for="OrderStatus" class="form-select">
+                        @foreach (var opt in orderStatusOptions)
+                        {
+                            <option value="@opt" selected="@(Model.OrderStatus == opt)">@opt</option>
+                        }
+                    </select>
+                    <span asp-validation-for="OrderStatus" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex gap-2">
+            <button type="submit" class="btn btn-primary">儲存變更</button>
+            <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

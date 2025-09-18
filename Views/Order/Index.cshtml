@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FinalExamProject.Models.Order>
+
+@{
+    ViewData["Title"] = "訂單列表";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">訂單列表</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>訂單編號</th>
+                <th>會員</th>
+                <th>收件人</th>
+                <th>付款狀態</th>
+                <th>出貨狀態</th>
+                <th>建立時間</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.OrderNumber</td>
+                    <td>@item.MemberInfo?.Name</td>
+                    <td>@item.RecipientName</td>
+                    <td>@item.PaymentStatus</td>
+                    <td>@item.ShippingStatus</td>
+                    <td>@item.CreatedDate.ToString("yyyy/MM/dd")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.OrderID" class="btn btn-sm btn-info">詳細</a>
+                        <a asp-action="Edit" asp-route-id="@item.OrderID" class="btn btn-sm btn-warning">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.OrderID" class="btn btn-sm btn-danger">刪除</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

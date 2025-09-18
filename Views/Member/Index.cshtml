@@ -1,77 +1,129 @@
 ﻿@model IEnumerable<FinalExamProject.Models.Member>
-
+@using FinalExamProject.Models
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "會員列表";
+
+    var query = ViewBag.Query as MemberQueryVm ?? new MemberQueryVm();
+    int total = ViewBag.Total ?? 0;
+    int curPage = ViewBag.Page ?? 1;         // ← 避免用 page 這個名字
+    int pageSize = ViewBag.PageSize ?? 10;
+    int totalPages = (int)Math.Ceiling((double)Math.Max(0, total) / Math.Max(1, pageSize));
+
+    string SortLink(string key) => Url.Action("Index", new
+    {
+        q = query.Q,
+        isEmailConfirmed = query.IsEmailConfirmed,
+        sort = key,
+        page = curPage,
+        pageSize
+    });
+
+    string PageLink(int p) => Url.Action("Index", new
+    {
+        q = query.Q,
+        isEmailConfirmed = query.IsEmailConfirmed,
+        sort = query.Sort,
+        page = p,
+        pageSize
+    });
 }
 
-<h1>Index</h1>
+<h2 class="mb-3">會員列表</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col">
+        <input type="text" name="q" class="form-control" value="@query.Q" placeholder="搜尋姓名 / Email / 電話" />
+    </div>
+    <div class="col-auto">
+        <select name="isEmailConfirmed" class="form-select">
+            <option value="">Email 驗證（全部）</option>
+            <option value="true" selected="@(query.IsEmailConfirmed == true)">已驗證</option>
+            <option value="false" selected="@(query.IsEmailConfirmed == false)">未驗證</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="pageSize" class="form-select">
+            @{
+                var sizes = new[] { 5, 10, 20, 50 };
+                foreach (var s in sizes)
+                {
+                    <option value="@s" selected="@(pageSize == s)">@s /頁</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary">查詢</button>
+        <a asp-action="Create" class="btn btn-success">新增會員</a>
+    </div>
+</form>
+
+<div class="mb-2 text-muted">
+    共 @total 筆，頁次 @(curPage) / @(totalPages)
+</div>
+
+<table class="table table-striped align-middle">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Birthday)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsEmailConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastLoginDate)
-            </th>
-            <th></th>
+            <th><a href="@SortLink(query.Sort == "name" ? "name_desc" : "name")">姓名</a></th>
+            <th><a href="@SortLink(query.Sort == "email" ? "email_desc" : "email")">Email</a></th>
+            <th>電話</th>
+            <th>性別</th>
+            <th>地址</th>
+            <th>已驗證</th>
+            <th><a href="@SortLink(query.Sort == "created" ? "created_desc" : "created")">註冊時間</a></th>
+            <th style="width:220px;"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Birthday)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsEmailConfirmed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastLoginDate)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MemberID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MemberID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MemberID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.Email</td>
+                <td>@m.Phone</td>
+                <td>@m.Sex</td>
+                <td class="text-truncate" style="max-width:220px">@m.Address</td>
+                <td>
+                    @if (m.IsEmailConfirmed)
+                    {
+                        <span class="badge bg-success">是</span>
+                    }
+                    else
+                    {
+
+                        <span class="badge bg-secondary">否</span>
+                    }
+                </td>
+                <td>@m.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@m.MemberID" class="btn btn-outline-secondary btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@m.MemberID" class="btn btn-primary btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@m.MemberID" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<nav>
+    <ul class="pagination">
+        <li class="page-item @(curPage <= 1 ? "disabled" : null)">
+            <a class="page-link" href="@PageLink(curPage - 1)">«</a>
+        </li>
+        @for (int i = 1; i <= totalPages; i++)
+        {
+            <li class="page-item @(i == curPage ? "active" : null)">
+                <a class="page-link" href="@PageLink(i)">@i</a>
+            </li>
+        }
+        <li class="page-item @(curPage >= totalPages ? "disabled" : null)">
+            <a class="page-link" href="@PageLink(curPage + 1)">»</a>
+        </li>
+    </ul>
+</na

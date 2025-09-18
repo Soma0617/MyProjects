@@ -1,0 +1,56 @@
+﻿@model FinalExamProject.Models.AccountCreateVm
+@using FinalExamProject.Models
+@{
+    ViewData["Title"] = "新增帳號";
+    // 從 ViewBag.Members 產生下拉（顯示 姓名 + Email）
+    var members = ViewBag.Members as IEnumerable<Member> ?? Enumerable.Empty<Member>();
+    var memberOptions = members
+        .Select(m => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+        {
+            Value = m.MemberID.ToString(),
+            Text = $"{m.Name} ({m.Email})"
+        }).ToList();
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">新增帳號</h2>
+
+    <form asp-action="Create" method="post" class="card">
+        @Html.AntiForgeryToken()
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="AccountID" class="form-label"></label>
+                    <input asp-for="AccountID" class="form-control" />
+                    <span asp-validation-for="AccountID" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="PasswordHash" class="form-label"></label>
+                    <input asp-for="PasswordHash" class="form-control" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="MemberID" class="form-label">對應會員</label>
+                    <select asp-for="MemberID" class="form-select"
+                            asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(memberOptions, "Value", "Text"))">
+                        <option value="">請選擇會員</option>
+                    </select>
+                    <span asp-validation-for="MemberID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex gap-2">
+            <button type="submit" class="btn btn-primary">儲存</button>
+            <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

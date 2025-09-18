@@ -1,0 +1,62 @@
+﻿@model FinalExamProject.Models.EmailVerificationEditVm
+@using FinalExamProject.Models
+@{
+    ViewData["Title"] = "編輯驗證碼";
+    var members = ViewBag.Members as IEnumerable<Member> ?? Enumerable.Empty<Member>();
+    var memberOptions = members
+        .Select(m => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+        {
+            Value = m.MemberID.ToString(),
+            Text = $"{m.Name} ({m.Email})",
+            Selected = (m.MemberID == Model.MemberID)
+        }).ToList();
+}
+
+<div class="container py-4">
+    <h2 class="mb-3">編輯驗證碼</h2>
+
+    <form asp-action="Edit" method="post" class="card">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="VerificationID" />
+
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="VerificationCode" class="form-label"></label>
+                    <input asp-for="VerificationCode" class="form-control" />
+                    <span asp-validation-for="VerificationCode" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="MemberID" class="form-label">會員</label>
+                    <select asp-for="MemberID" class="form-select"
+                            asp-items="@(new Microsoft.AspNetCore.Mvc.Rendering.SelectList(memberOptions, "Value", "Text"))">
+                    </select>
+                    <span asp-validation-for="MemberID" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="ExpirationTime" class="form-label"></label>
+                    <input asp-for="ExpirationTime" type="datetime-local" class="form-control" />
+                    <span asp-validation-for="ExpirationTime" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 form-check d-flex align-items-center">
+                    <input asp-for="IsVerified" class="form-check-input me-2" />
+                    <label asp-for="IsVerified" class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer d-flex gap-2">
+            <button type="submit" class="btn btn-primary">儲存變更</button>
+            <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

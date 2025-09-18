@@ -1,0 +1,61 @@
+﻿@model FinalExamProject.Models.Order
+@{
+    ViewData["Title"] = "刪除訂單";
+}
+
+<div class="container py-4">
+    <h2 class="mb-3 text-danger">刪除確認</h2>
+    <p class="text-muted">確定要刪除此筆訂單嗎？此操作無法復原。</p>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-3">訂單編號</dt>
+                <dd class="col-sm-9 fw-semibold">@Model.OrderNumber</dd>
+
+                <dt class="col-sm-3">會員</dt>
+                <dd class="col-sm-9">
+                    @if (Model.MemberInfo is not null)
+                    {
+                        <div class="d-flex flex-column">
+                            <span>@Model.MemberInfo.Name</span>
+                            <small class="text-muted">@Model.MemberInfo.Email</small>
+                        </div>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">未連結會員</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">收件資訊</dt>
+                <dd class="col-sm-9">
+                    <div class="d-flex flex-column">
+                        <span>@Model.RecipientName</span>
+                        <small class="text-muted">@Model.RecipientPhone</small>
+                        <small class="text-muted">@Model.RecipientAddress</small>
+                    </div>
+                </dd>
+
+                <dt class="col-sm-3">付款狀態 / 方式</dt>
+                <dd class="col-sm-9">@Model.PaymentStatus / @(Model.PaymentMethod ?? "-")</dd>
+
+                <dt class="col-sm-3">出貨 / 訂單狀態</dt>
+                <dd class="col-sm-9">@Model.ShippingStatus / @Model.OrderStatus</dd>
+
+                <dt class="col-sm-3">建立 / 更新</dt>
+                <dd class="col-sm-9">
+                    @Model.CreatedDate.ToString("yyyy/MM/dd HH:mm") /
+                    @Model.UpdatedDate.ToString("yyyy/MM/dd HH:mm")
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post" class="d-flex gap-2">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" value="@Model.OrderID" />
+        <button type="submit" class="btn btn-danger">刪除</button>
+        <a asp-action="Index" class="btn btn-secondary">取消</a>
+    </form>
+</div>
