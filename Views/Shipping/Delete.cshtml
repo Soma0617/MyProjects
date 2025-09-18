@@ -1,0 +1,37 @@
+﻿@model FinalExamProject.Models.Shipping
+@{
+    ViewData["Title"] = "刪除出貨紀錄";
+}
+
+<h2 class="text-danger">刪除出貨紀錄</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除紀錄，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderInfo?.OrderNumber</dd>
+
+            <dt class="col-sm-3">物流單號</dt>
+            <dd class="col-sm-9">@Model.TrackingNumber</dd>
+
+            <dt class="col-sm-3">物流公司</dt>
+            <dd class="col-sm-9">@Model.Carrier</dd>
+
+            <dt class="col-sm-3">收件人姓名</dt>
+            <dd class="col-sm-9">@Model.RecipientName</dd>
+
+            <dt class="col-sm-3">收件地址</dt>
+            <dd class="col-sm-9">@Model.ShippingAddress</dd>
+
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ShippingID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

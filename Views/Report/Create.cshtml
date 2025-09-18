@@ -1,0 +1,37 @@
+﻿@model FinalExamProject.Models.ReportCreateVm
+@{
+    ViewData["Title"] = "新增報表";
+}
+
+<h2>新增報表</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="ReportName" class="form-label"></label>
+        <input asp-for="ReportName" class="form-control" />
+        <span asp-validation-for="ReportName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="ReportType" class="form-label"></label>
+        <input asp-for="ReportType" class="form-control" />
+        <span asp-validation-for="ReportType" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label"></label>
+        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="CreatedBy" class="form-label"></label>
+        <input asp-for="CreatedBy" class="form-control" />
+        <span asp-validation-for="CreatedBy" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">新增</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

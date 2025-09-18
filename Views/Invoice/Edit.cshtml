@@ -1,0 +1,70 @@
+﻿@model FinalExamProject.Models.InvoiceEditVm
+@{
+    ViewData["Title"] = "編輯發票";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+}
+
+<h2>編輯發票</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="InvoiceID" />
+
+    <!-- 訂單選擇 -->
+    <div class="mb-3">
+        <label asp-for="OrderID" class="form-label">訂單</label>
+        <select asp-for="OrderID" class="form-select">
+            <option value="">請選擇訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(Model.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+        <span asp-validation-for="OrderID" class="text-danger"></span>
+    </div>
+
+    <!-- 發票號碼 -->
+    <div class="mb-3">
+        <label asp-for="InvoiceNumber" class="form-label"></label>
+        <input asp-for="InvoiceNumber" class="form-control" />
+        <span asp-validation-for="InvoiceNumber" class="text-danger"></span>
+    </div>
+
+    <!-- 發票日期 -->
+    <div class="mb-3">
+        <label asp-for="InvoiceDate" class="form-label"></label>
+        <input asp-for="InvoiceDate" type="date" class="form-control" />
+        <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+    </div>
+
+    <!-- 金額 -->
+    <div class="mb-3">
+        <label asp-for="Amount" class="form-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <!-- 稅額 -->
+    <div class="mb-3">
+        <label asp-for="Tax" class="form-label"></label>
+        <input asp-for="Tax" class="form-control" />
+        <span asp-validation-for="Tax" class="text-danger"></span>
+    </div>
+
+    <!-- 總金額 -->
+    <div class="mb-3">
+        <label asp-for="TotalAmount" class="form-label"></label>
+        <input asp-for="TotalAmount" class="form-control" />
+        <span asp-validation-for="TotalAmount" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">儲存變更</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

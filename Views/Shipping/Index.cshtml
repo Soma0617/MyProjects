@@ -1,0 +1,66 @@
+﻿@model IEnumerable<FinalExamProject.Models.Shipping>
+@{
+    ViewData["Title"] = "出貨管理";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+    var query = ViewBag.Query as FinalExamProject.Models.ShippingQueryVm;
+}
+
+<h2>出貨紀錄列表</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="OrderID" class="form-select">
+            <option value="">全部訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(query?.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="Status" class="form-select">
+            <option value="">全部狀態</option>
+            <option value="Processing" selected="@(query?.Status == "Processing")">處理中</option>
+            <option value="Shipped" selected="@(query?.Status == "Shipped")">已出貨</option>
+            <option value="Delivered" selected="@(query?.Status == "Delivered")">已送達</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Create" class="btn btn-success">新增出貨</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>物流單號</th>
+            <th>物流公司</th>
+            <th>收件人</th>
+            <th>狀態</th>
+            <th>出貨日期</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderInfo?.OrderNumber</td>
+                <td>@item.TrackingNumber</td>
+                <td>@item.Carrier</td>
+                <td>@item.RecipientName</td>
+                <td>@item.Status</td>
+                <td>@item.ShippedDate.ToString("yyyy/MM/dd")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ShippingID" class="btn btn-info btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.ShippingID" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@item.ShippingID" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

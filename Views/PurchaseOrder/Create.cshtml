@@ -1,0 +1,35 @@
+﻿@model FinalExamProject.Models.PurchaseOrderCreateVm
+@{
+    ViewData["Title"] = "新增採購單";
+}
+
+<h2>新增採購單</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="PurchaseOrderCode" class="form-label"></label>
+        <input asp-for="PurchaseOrderCode" class="form-control" />
+        <span asp-validation-for="PurchaseOrderCode" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SupplierName" class="form-label"></label>
+        <input asp-for="SupplierName" class="form-control" />
+        <span asp-validation-for="SupplierName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <input asp-for="Status" class="form-control" />
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">新增</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

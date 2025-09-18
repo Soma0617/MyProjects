@@ -1,0 +1,55 @@
+﻿@model FinalExamProject.Models.PurchaseOrderDetailCreateVm
+@{
+    ViewData["Title"] = "新增採購單明細";
+    var pos = ViewBag.PurchaseOrders as List<FinalExamProject.Models.PurchaseOrder>;
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+}
+
+<h2>新增採購單明細</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="PurchaseOrderID" class="form-label">採購單</label>
+        <select asp-for="PurchaseOrderID" class="form-select">
+            <option value="">請選擇採購單</option>
+            @foreach (var p in pos!)
+            {
+                <option value="@p.PurchaseOrderID">@p.PurchaseOrderCode - @p.SupplierName</option>
+            }
+        </select>
+        <span asp-validation-for="PurchaseOrderID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductID" class="form-label">產品</label>
+        <select asp-for="ProductID" class="form-select">
+            <option value="">請選擇產品</option>
+            @foreach (var pr in products!)
+            {
+                <option value="@pr.ProductID">@pr.ProductName</option>
+            }
+        </select>
+        <span asp-validation-for="ProductID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UnitPrice" class="form-label"></label>
+        <input asp-for="UnitPrice" class="form-control" />
+        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">新增</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

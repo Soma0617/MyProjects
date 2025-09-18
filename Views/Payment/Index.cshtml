@@ -1,0 +1,86 @@
+﻿@model IEnumerable<FinalExamProject.Models.Payment>
+@{
+    ViewData["Title"] = "付款管理";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+    var query = ViewBag.Query as FinalExamProject.Models.PaymentQueryVm;
+}
+
+<h2>付款紀錄列表</h2>
+
+<!-- 篩選表單 -->
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="OrderID" class="form-select">
+            <option value="">全部訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(query?.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <input type="text" name="PaymentMethod" value="@query?.PaymentMethod" class="form-control" placeholder="付款方式" />
+    </div>
+    <div class="col-auto">
+        <input type="text" name="Status" value="@query?.Status" class="form-control" placeholder="狀態 (Pending/Completed)" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增付款</a>
+    </div>
+</form>
+
+<!-- 成功訊息 -->
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<!-- 付款表格 -->
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>付款方式</th>
+            <th>付款金額</th>
+            <th>付款日期</th>
+            <th>狀態</th>
+            <th>交易編號</th>
+            <th>訂單編號</th>
+            <th>建立時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PaymentMethod</td>
+                    <td>@item.TotalAmount.ToString("C")</td>
+                    <td>@item.PaymentDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@item.Status</td>
+                    <td>@item.TransactionID</td>
+                    <td>@item.OrderInfo?.OrderNumber</td>
+                    <td>@item.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PaymentID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.PaymentID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.PaymentID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8" class="text-center text-muted">目前沒有付款資料</td>
+            </tr>
+        }
+    </tbody>
+</table>

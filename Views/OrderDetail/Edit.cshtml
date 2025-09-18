@@ -1,0 +1,61 @@
+﻿@model FinalExamProject.Models.OrderDetailEditVm
+@{
+    ViewData["Title"] = "編輯訂單明細";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+}
+
+<h2>編輯訂單明細</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="OrderDetailID" />
+
+    <div class="mb-3">
+        <label asp-for="OrderID" class="form-label">訂單</label>
+        <select asp-for="OrderID" class="form-select">
+            <option value="">請選擇訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(Model.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+        <span asp-validation-for="OrderID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ProductID" class="form-label">商品</label>
+        <select asp-for="ProductID" class="form-select">
+            <option value="">請選擇商品</option>
+            @foreach (var p in products!)
+            {
+                <option value="@p.ProductID" selected="@(Model.ProductID == p.ProductID)">
+                    @p.ProductName
+                </option>
+            }
+        </select>
+        <span asp-validation-for="ProductID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="UnitPrice" class="form-label"></label>
+        <input asp-for="UnitPrice" class="form-control" />
+        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">儲存變更</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

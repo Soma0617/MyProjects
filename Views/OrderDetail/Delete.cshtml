@@ -1,0 +1,34 @@
+﻿@model FinalExamProject.Models.OrderDetail
+@{
+    ViewData["Title"] = "刪除訂單明細";
+}
+
+<h2 class="text-danger">刪除訂單明細</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除該明細，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderInfo?.OrderNumber</dd>
+
+            <dt class="col-sm-3">商品名稱</dt>
+            <dd class="col-sm-9">@Model.ProductInfo?.ProductName</dd>
+
+            <dt class="col-sm-3">數量</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+
+            <dt class="col-sm-3">單價</dt>
+            <dd class="col-sm-9">@Model.UnitPrice.ToString("C")</dd>
+
+            <dt class="col-sm-3">小計</dt>
+            <dd class="col-sm-9">@Model.Subtotal.ToString("C")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="OrderDetailID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

@@ -1,0 +1,30 @@
+﻿@model FinalExamProject.Models.Inventory
+@{
+    ViewData["Title"] = "庫存詳細資料";
+}
+
+<h2>庫存詳細資料</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">產品名稱</dt>
+            <dd class="col-sm-9">@Model.ProductInfo?.ProductName</dd>
+
+            <dt class="col-sm-3">庫存數量</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+
+            <dt class="col-sm-3">安全庫存量</dt>
+            <dd class="col-sm-9">@Model.SafetyStock</dd>
+
+            <dt class="col-sm-3">最後更新時間</dt>
+            <dd class="col-sm-9">@Model.LastUpdated.ToString("yyyy/MM/dd HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.InventoryID" class="btn btn-warning">編輯</a>
+    <a asp-action="Delete" asp-route-id="@Model.InventoryID" class="btn btn-danger">刪除</a>
+    <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+</div>

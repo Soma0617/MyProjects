@@ -1,0 +1,34 @@
+﻿@model FinalExamProject.Models.Report
+@{
+    ViewData["Title"] = "刪除報表";
+}
+
+<h2 class="text-danger">刪除報表</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除此報表，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">報表名稱</dt>
+            <dd class="col-sm-9">@Model.ReportName</dd>
+
+            <dt class="col-sm-3">報表類型</dt>
+            <dd class="col-sm-9">@Model.ReportType</dd>
+
+            <dt class="col-sm-3">內容</dt>
+            <dd class="col-sm-9">@Model.Content</dd>
+
+            <dt class="col-sm-3">建立人員</dt>
+            <dd class="col-sm-9">@Model.CreatedBy</dd>
+
+            <dt class="col-sm-3">建立時間</dt>
+            <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ReportID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

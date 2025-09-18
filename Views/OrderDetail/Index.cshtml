@@ -1,0 +1,68 @@
+﻿@model IEnumerable<FinalExamProject.Models.OrderDetail>
+@{
+    ViewData["Title"] = "訂單明細管理";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+    var query = ViewBag.Query as FinalExamProject.Models.OrderDetailQueryVm;
+}
+
+<h2>訂單明細列表</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="OrderID" class="form-select">
+            <option value="">全部訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(query?.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="ProductID" class="form-select">
+            <option value="">全部商品</option>
+            @foreach (var p in products!)
+            {
+                <option value="@p.ProductID" selected="@(query?.ProductID == p.ProductID)">
+                    @p.ProductName
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Create" class="btn btn-success">新增明細</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>商品名稱</th>
+            <th>數量</th>
+            <th>單價</th>
+            <th>小計</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrderInfo?.OrderNumber</td>
+                <td>@item.ProductInfo?.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@item.Subtotal.ToString("C")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.OrderDetailID" class="btn btn-info btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.OrderDetailID" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@item.OrderDetailID" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

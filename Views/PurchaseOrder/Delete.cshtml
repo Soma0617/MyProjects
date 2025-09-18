@@ -1,0 +1,28 @@
+﻿@model FinalExamProject.Models.PurchaseOrder
+@{
+    ViewData["Title"] = "刪除採購單";
+}
+
+<h2 class="text-danger">刪除採購單</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除該筆採購單，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">採購單號</dt>
+            <dd class="col-sm-9">@Model.PurchaseOrderCode</dd>
+
+            <dt class="col-sm-3">供應商名稱</dt>
+            <dd class="col-sm-9">@Model.SupplierName</dd>
+
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="PurchaseOrderID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

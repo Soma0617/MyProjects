@@ -1,0 +1,39 @@
+﻿@model FinalExamProject.Models.Invoice
+@{
+    ViewData["Title"] = "發票詳細資料";
+}
+
+<h2>發票詳細資料</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">發票號碼</dt>
+            <dd class="col-sm-9">@Model.InvoiceNumber</dd>
+
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderInfo?.OrderNumber</dd>
+
+            <dt class="col-sm-3">發票日期</dt>
+            <dd class="col-sm-9">@Model.InvoiceDate.ToString("yyyy/MM/dd")</dd>
+
+            <dt class="col-sm-3">金額</dt>
+            <dd class="col-sm-9">@Model.Amount.ToString("C")</dd>
+
+            <dt class="col-sm-3">稅額</dt>
+            <dd class="col-sm-9">@Model.Tax.ToString("C")</dd>
+
+            <dt class="col-sm-3">總金額</dt>
+            <dd class="col-sm-9">@Model.TotalAmount.ToString("C")</dd>
+
+            <dt class="col-sm-3">建立時間</dt>
+            <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.InvoiceID" class="btn btn-warning">編輯</a>
+    <a asp-action="Delete" asp-route-id="@Model.InvoiceID" class="btn btn-danger">刪除</a>
+    <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+</div>

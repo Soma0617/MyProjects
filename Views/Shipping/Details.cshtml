@@ -1,0 +1,68 @@
+﻿@model FinalExamProject.Models.Shipping
+@{
+    ViewData["Title"] = "出貨紀錄詳細";
+}
+
+<h2>出貨紀錄詳細</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderInfo?.OrderNumber</dd>
+
+            <dt class="col-sm-3">物流單號</dt>
+            <dd class="col-sm-9">@Model.TrackingNumber</dd>
+
+            <dt class="col-sm-3">物流公司</dt>
+            <dd class="col-sm-9">@Model.Carrier</dd>
+
+            <dt class="col-sm-3">收件人姓名</dt>
+            <dd class="col-sm-9">@Model.RecipientName</dd>
+
+            <dt class="col-sm-3">收件地址</dt>
+            <dd class="col-sm-9">@Model.ShippingAddress</dd>
+
+            <dt class="col-sm-3">收件電話</dt>
+            <dd class="col-sm-9">@Model.RecipientPhone</dd>
+
+            <dt class="col-sm-3">出貨日期</dt>
+            <dd class="col-sm-9">@Model.ShippedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+
+            <dt class="col-sm-3">預計送達日期</dt>
+            <dd class="col-sm-9">@Model.EstimatedArrivalDate?.ToString("yyyy/MM/dd HH:mm")</dd>
+
+            <dt class="col-sm-3">實際送達日期</dt>
+            <dd class="col-sm-9">@Model.DeliveredDate?.ToString("yyyy/MM/dd HH:mm")</dd>
+
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">
+                @if (Model.Status == "Processing")
+                {
+                    <span class="badge bg-warning text-dark">處理中</span>
+                }
+                else if (Model.Status == "Shipped")
+                {
+                    <span class="badge bg-info text-dark">已出貨</span>
+                }
+                else if (Model.Status == "Delivered")
+                {
+                    <span class="badge bg-success">已送達</span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">@Model.Status</span>
+                }
+            </dd>
+
+            <dt class="col-sm-3">建立時間</dt>
+            <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.ShippingID" class="btn btn-warning">編輯</a>
+    <a asp-action="Delete" asp-route-id="@Model.ShippingID" class="btn btn-danger">刪除</a>
+    <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+</div>

@@ -1,0 +1,34 @@
+﻿@model FinalExamProject.Models.Payment
+@{
+    ViewData["Title"] = "刪除付款紀錄";
+}
+
+<h2 class="text-danger">刪除付款紀錄</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除該筆付款紀錄，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderInfo?.OrderNumber</dd>
+
+            <dt class="col-sm-3">付款方式</dt>
+            <dd class="col-sm-9">@Model.PaymentMethod</dd>
+
+            <dt class="col-sm-3">付款金額</dt>
+            <dd class="col-sm-9">@Model.TotalAmount.ToString("C")</dd>
+
+            <dt class="col-sm-3">付款日期</dt>
+            <dd class="col-sm-9">@Model.PaymentDate.ToString("yyyy/MM/dd HH:mm")</dd>
+
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">@Model.Status</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="PaymentID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

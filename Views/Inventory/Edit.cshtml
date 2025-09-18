@@ -1,0 +1,46 @@
+﻿@model FinalExamProject.Models.InventoryEditVm
+@{
+    ViewData["Title"] = "編輯庫存紀錄";
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+}
+
+<h2>編輯庫存</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="InventoryID" />
+
+    <div class="mb-3">
+        <label asp-for="ProductID" class="form-label">產品</label>
+        <select asp-for="ProductID" class="form-select">
+            <option value="">請選擇產品</option>
+            @foreach (var p in products!)
+            {
+                <option value="@p.ProductID" selected="@(Model.ProductID == p.ProductID)">
+                    @p.ProductName
+                </option>
+            }
+        </select>
+        <span asp-validation-for="ProductID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label"></label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SafetyStock" class="form-label"></label>
+        <input asp-for="SafetyStock" class="form-control" />
+        <span asp-validation-for="SafetyStock" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">儲存變更</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

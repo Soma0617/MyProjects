@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FinalExamProject.Models.Invoice>
+@{
+    ViewData["Title"] = "發票管理";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+    var query = ViewBag.Query as FinalExamProject.Models.InvoiceQueryVm;
+}
+
+<h2>發票紀錄列表</h2>
+
+<!-- 篩選表單 -->
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="OrderID" class="form-select">
+            <option value="">全部訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(query?.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <input type="text" name="InvoiceNumber" value="@query?.InvoiceNumber" class="form-control" placeholder="輸入發票號碼" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增發票</a>
+    </div>
+</form>
+
+<!-- 提示訊息 -->
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<!-- 發票表格 -->
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>發票號碼</th>
+            <th>訂單編號</th>
+            <th>發票日期</th>
+            <th>金額</th>
+            <th>稅額</th>
+            <th>總金額</th>
+            <th>建立時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.InvoiceNumber</td>
+                    <td>@item.OrderInfo?.OrderNumber</td>
+                    <td>@item.InvoiceDate.ToString("yyyy/MM/dd")</td>
+                    <td>@item.Amount.ToString("C")</td>
+                    <td>@item.Tax.ToString("C")</td>
+                    <td>@item.TotalAmount.ToString("C")</td>
+                    <td>@item.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.InvoiceID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.InvoiceID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.InvoiceID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="8" class="text-center text-muted">目前沒有發票資料</td>
+            </tr>
+        }
+    </tbody>
+</table>

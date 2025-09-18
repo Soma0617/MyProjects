@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FinalExamProject.Models.PurchaseOrderDetail>
+@{
+    ViewData["Title"] = "採購單明細管理";
+    var pos = ViewBag.PurchaseOrders as List<FinalExamProject.Models.PurchaseOrder>;
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+    var query = ViewBag.Query as FinalExamProject.Models.PurchaseOrderDetailQueryVm;
+}
+
+<h2>採購單明細列表</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="PurchaseOrderID" class="form-select">
+            <option value="">全部採購單</option>
+            @foreach (var p in pos!)
+            {
+                <option value="@p.PurchaseOrderID" selected="@(query?.PurchaseOrderID == p.PurchaseOrderID)">
+                    @p.PurchaseOrderCode - @p.SupplierName
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-auto">
+        <select name="ProductID" class="form-select">
+            <option value="">全部產品</option>
+            @foreach (var pr in products!)
+            {
+                <option value="@pr.ProductID" selected="@(query?.ProductID == pr.ProductID)">
+                    @pr.ProductName
+                </option>
+            }
+        </select>
+    </div>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增明細</a>
+    </div>
+</form>
+
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>採購單號</th>
+            <th>產品</th>
+            <th>數量</th>
+            <th>單價</th>
+            <th>小計</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PurchaseOrderInfo?.PurchaseOrderCode</td>
+                    <td>@item.ProductInfo?.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice.ToString("C")</td>
+                    <td>@(item.Quantity* item.UnitPrice).ToString("C")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PurchaseOrderDetailID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.PurchaseOrderDetailID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.PurchaseOrderDetailID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="6" class="text-center text-muted">目前沒有明細資料</td></tr>
+        }
+    </tbody>
+</table>

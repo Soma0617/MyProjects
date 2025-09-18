@@ -1,0 +1,73 @@
+﻿@model IEnumerable<FinalExamProject.Models.PurchaseOrder>
+@{
+    ViewData["Title"] = "採購單管理";
+    var query = ViewBag.Query as FinalExamProject.Models.PurchaseOrderQueryVm;
+}
+
+<h2>採購單列表</h2>
+
+<!-- 篩選表單 -->
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <input type="text" name="SupplierName" value="@query?.SupplierName" class="form-control" placeholder="供應商名稱" />
+    </div>
+    <div class="col-auto">
+        <select name="Status" class="form-select">
+            <option value="">全部狀態</option>
+            <option value="Pending" selected="@(query?.Status == "Pending")">Pending</option>
+            <option value="Completed" selected="@(query?.Status == "Completed")">Completed</option>
+            <option value="Cancelled" selected="@(query?.Status == "Cancelled")">Cancelled</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增採購單</a>
+    </div>
+</form>
+
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>採購單號</th>
+            <th>供應商</th>
+            <th>狀態</th>
+            <th>建立時間</th>
+            <th>更新時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PurchaseOrderCode</td>
+                    <td>@item.SupplierName</td>
+                    <td>@item.Status</td>
+                    <td>@item.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@item.UpdatedDate?.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PurchaseOrderID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.PurchaseOrderID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.PurchaseOrderID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center text-muted">目前沒有採購單資料</td>
+            </tr>
+        }
+    </tbody>
+</table>

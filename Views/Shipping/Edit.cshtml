@@ -1,0 +1,95 @@
+﻿@model FinalExamProject.Models.ShippingEditVm
+@{
+    ViewData["Title"] = "編輯出貨紀錄";
+    var orders = ViewBag.Orders as List<FinalExamProject.Models.Order>;
+}
+
+<h2>編輯出貨紀錄</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ShippingID" />
+
+    <div class="mb-3">
+        <label asp-for="OrderID" class="form-label">訂單</label>
+        <select asp-for="OrderID" class="form-select">
+            <option value="">請選擇訂單</option>
+            @foreach (var o in orders!)
+            {
+                <option value="@o.OrderID" selected="@(Model.OrderID == o.OrderID)">
+                    @o.OrderNumber
+                </option>
+            }
+        </select>
+        <span asp-validation-for="OrderID" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TrackingNumber" class="form-label"></label>
+        <input asp-for="TrackingNumber" class="form-control" />
+        <span asp-validation-for="TrackingNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Carrier" class="form-label"></label>
+        <input asp-for="Carrier" class="form-control" />
+        <span asp-validation-for="Carrier" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RecipientName" class="form-label"></label>
+        <input asp-for="RecipientName" class="form-control" />
+        <span asp-validation-for="RecipientName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ShippingAddress" class="form-label"></label>
+        <input asp-for="ShippingAddress" class="form-control" />
+        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RecipientPhone" class="form-label"></label>
+        <input asp-for="RecipientPhone" class="form-control" />
+        <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ShippedDate" class="form-label"></label>
+        <input asp-for="ShippedDate" type="datetime-local" class="form-control"
+               value="@Model.ShippedDate.ToString("yyyy-MM-ddTHH:mm")" />
+        <span asp-validation-for="ShippedDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EstimatedArrivalDate" class="form-label"></label>
+        <input asp-for="EstimatedArrivalDate" type="datetime-local" class="form-control"
+               value="@(Model.EstimatedArrivalDate?.ToString("yyyy-MM-ddTHH:mm"))" />
+        <span asp-validation-for="EstimatedArrivalDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DeliveredDate" class="form-label"></label>
+        <input asp-for="DeliveredDate" type="datetime-local" class="form-control"
+               value="@(Model.DeliveredDate?.ToString("yyyy-MM-ddTHH:mm"))" />
+        <span asp-validation-for="DeliveredDate" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <select asp-for="Status" class="form-select">
+            <option value="Processing" selected="@(Model.Status == "Processing")">處理中</option>
+            <option value="Shipped" selected="@(Model.Status == "Shipped")">已出貨</option>
+            <option value="Delivered" selected="@(Model.Status == "Delivered")">已送達</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">儲存變更</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

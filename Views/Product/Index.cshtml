@@ -1,0 +1,68 @@
+﻿@model IEnumerable<FinalExamProject.Models.Product>
+@{
+    ViewData["Title"] = "商品管理";
+    var query = ViewBag.Query as FinalExamProject.Models.ProductQueryVm;
+    var categories = ViewBag.Categories as List<FinalExamProject.Models.Category>;
+}
+
+<h2>商品列表</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <input type="text" name="Q" value="@query?.Q" class="form-control" placeholder="關鍵字搜尋" />
+    </div>
+    <div class="col-auto">
+        <select name="CategoryID" class="form-select">
+            <option value="">全部分類</option>
+            @foreach (var c in categories!)
+            {
+                <option value="@c.CategoryID" selected="@(query?.CategoryID == c.CategoryID)">
+                    @c.CategoryName
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <select name="IsActive" class="form-select">
+            <option value="">全部狀態</option>
+            <option value="true" selected="@(query?.IsActive == true)">已上架</option>
+            <option value="false" selected="@(query?.IsActive == false)">未上架</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">查詢</button>
+        <a asp-action="Create" class="btn btn-success">新增商品</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>代碼</th>
+            <th>名稱</th>
+            <th>分類</th>
+            <th>價格</th>
+            <th>狀態</th>
+            <th>建立時間</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductCode</td>
+                <td>@item.ProductName</td>
+                <td>@item.CategoryInfo?.CategoryName</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@(item.IsActive ? "上架" : "下架")</td>
+                <td>@item.CreatedDate.ToString("yyyy/MM/dd")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-info btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@item.ProductID" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

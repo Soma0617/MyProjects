@@ -1,0 +1,28 @@
+﻿@model FinalExamProject.Models.Inventory
+@{
+    ViewData["Title"] = "刪除庫存紀錄";
+}
+
+<h2 class="text-danger">刪除庫存紀錄</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除該筆庫存資料，確定要繼續嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">產品名稱</dt>
+            <dd class="col-sm-9">@Model.ProductInfo?.ProductName</dd>
+
+            <dt class="col-sm-3">庫存數量</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+
+            <dt class="col-sm-3">安全庫存量</dt>
+            <dd class="col-sm-9">@Model.SafetyStock</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="InventoryID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

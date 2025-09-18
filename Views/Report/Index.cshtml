@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FinalExamProject.Models.Report>
+@{
+    ViewData["Title"] = "報表管理";
+    var query = ViewBag.Query as FinalExamProject.Models.ReportQueryVm;
+}
+
+<h2>報表管理</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <input type="text" name="ReportName" value="@query?.ReportName" placeholder="輸入報表名稱" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <input type="text" name="ReportType" value="@query?.ReportType" placeholder="輸入報表類型" class="form-control" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">搜尋</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增報表</a>
+    </div>
+</form>
+
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>報表名稱</th>
+            <th>報表類型</th>
+            <th>建立人員</th>
+            <th>建立時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ReportName</td>
+                    <td>@item.ReportType</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.ReportID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.ReportID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.ReportID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center text-muted">尚無報表資料</td></tr>
+        }
+    </tbody>
+</table>

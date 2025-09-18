@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FinalExamProject.Models.Category>
+@{
+    ViewData["Title"] = "分類管理";
+    var query = ViewBag.Query as FinalExamProject.Models.CategoryQueryVm;
+}
+
+<h2>分類列表</h2>
+
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <input type="text" name="Q" value="@query?.Q" class="form-control" placeholder="搜尋分類名稱或代碼" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">查詢</button>
+        <a asp-action="Create" class="btn btn-success">新增分類</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-Sort="name">名稱</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-Sort="code">代碼</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CategoryName</td>
+                <td>@item.CategoryCode</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.CategoryID" class="btn btn-info btn-sm">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@item.CategoryID" class="btn btn-warning btn-sm">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@item.CategoryID" class="btn btn-danger btn-sm">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model FinalExamProject.Models.Category
+@{
+    ViewData["Title"] = "刪除分類";
+}
+
+<h2 class="text-danger">刪除分類</h2>
+<p class="text-warning">⚠️ 此操作將永久刪除分類，確定要刪除嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">分類編號</dt>
+            <dd class="col-sm-9">@Model.CategoryID</dd>
+
+            <dt class="col-sm-3">分類名稱</dt>
+            <dd class="col-sm-9">@Model.CategoryName</dd>
+
+            <dt class="col-sm-3">分類代碼</dt>
+            <dd class="col-sm-9">@Model.CategoryCode</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="CategoryID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

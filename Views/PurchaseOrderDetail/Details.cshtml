@@ -1,0 +1,33 @@
+﻿@model FinalExamProject.Models.PurchaseOrderDetail
+@{
+    ViewData["Title"] = "採購單明細詳細";
+}
+
+<h2>採購單明細詳細</h2>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">採購單號</dt>
+            <dd class="col-sm-9">@Model.PurchaseOrderInfo?.PurchaseOrderCode</dd>
+
+            <dt class="col-sm-3">產品</dt>
+            <dd class="col-sm-9">@Model.ProductInfo?.ProductName</dd>
+
+            <dt class="col-sm-3">數量</dt>
+            <dd class="col-sm-9">@Model.Quantity</dd>
+
+            <dt class="col-sm-3">單價</dt>
+            <dd class="col-sm-9">@Model.UnitPrice.ToString("C")</dd>
+
+            <dt class="col-sm-3">小計</dt>
+            <dd class="col-sm-9">@((Model.Quantity * Model.UnitPrice).ToString("C"))</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.PurchaseOrderDetailID" class="btn btn-warning">編輯</a>
+    <a asp-action="Delete" asp-route-id="@Model.PurchaseOrderDetailID" class="btn btn-danger">刪除</a>
+    <a asp-action="Index" class="btn btn-secondary">返回列表</a>
+</div>

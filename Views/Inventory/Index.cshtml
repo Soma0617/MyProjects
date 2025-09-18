@@ -1,0 +1,78 @@
+﻿@model IEnumerable<FinalExamProject.Models.Inventory>
+@{
+    ViewData["Title"] = "庫存管理";
+    var products = ViewBag.Products as List<FinalExamProject.Models.Product>;
+    var query = ViewBag.Query as FinalExamProject.Models.InventoryQueryVm;
+}
+
+<h2>庫存紀錄列表</h2>
+
+<!-- 篩選表單 -->
+<form method="get" class="row g-3 mb-3">
+    <div class="col-auto">
+        <select name="ProductID" class="form-select">
+            <option value="">全部產品</option>
+            @foreach (var p in products!)
+            {
+                <option value="@p.ProductID" selected="@(query?.ProductID == p.ProductID)">
+                    @p.ProductName
+                </option>
+            }
+        </select>
+    </div>
+    <div class="col-auto">
+        <input type="number" name="MinQty" value="@query?.MinQty" class="form-control" placeholder="最少數量" />
+    </div>
+    <div class="col-auto">
+        <input type="number" name="MaxQty" value="@query?.MaxQty" class="form-control" placeholder="最多數量" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">篩選</button>
+        <a asp-action="Index" class="btn btn-secondary">清除</a>
+    </div>
+    <div class="col-auto">
+        <a asp-action="Create" class="btn btn-success">➕ 新增庫存</a>
+    </div>
+</form>
+
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+
+<table class="table table-striped table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>產品名稱</th>
+            <th>庫存數量</th>
+            <th>安全庫存量</th>
+            <th>最後更新時間</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.ProductInfo?.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.SafetyStock</td>
+                    <td>@item.LastUpdated.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.InventoryID" class="btn btn-info btn-sm">檢視</a>
+                        <a asp-action="Edit" asp-route-id="@item.InventoryID" class="btn btn-warning btn-sm">編輯</a>
+                        <a asp-action="Delete" asp-route-id="@item.InventoryID" class="btn btn-danger btn-sm">刪除</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center text-muted">目前沒有庫存資料</td>
+            </tr>
+        }
+    </tbody>
+</table>
