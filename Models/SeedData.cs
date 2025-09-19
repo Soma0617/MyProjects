@@ -48,7 +48,7 @@ namespace FinalExamProject.Models
             }
 
             // Member
-            Member? member1 = context.Member.FirstOrDefault(m => m.Email == "12121125@gmail.com" && m.Name == "Soma");
+            Member? member1 = context.Member.FirstOrDefault(m => m.Email == "12121320@gmail.com" && m.Name == "Soma");
             Member? member2 = context.Member.FirstOrDefault(m => m.Email == "12121125@gmail.com" && m.Name == "Amos");
 
             if (member1 == null || member2 == null)
@@ -64,7 +64,7 @@ namespace FinalExamProject.Models
                     IsEmailConfirmed = true,
                     CreatedDate = now,
                     LastLoginDate = now,
-                    Email = "12121125@gmail.com"
+                    Email = "12121320@gmail.com"
                 };
                 member2 ??= new Member
                 {
