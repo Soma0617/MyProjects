@@ -1,0 +1,34 @@
+﻿@model FinalExamProject.Models.Order
+@{
+    ViewData["Title"] = "刪除訂單";
+}
+
+<h2 class="text-danger">刪除訂單</h2>
+<p class="text-warning">此操作無法復原，確定要刪除此訂單嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">訂單編號</dt>
+            <dd class="col-sm-9">@Model.OrderNumber</dd>
+
+            <dt class="col-sm-3">建立時間</dt>
+            <dd class="col-sm-9">@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</dd>
+
+            <dt class="col-sm-3">收件人</dt>
+            <dd class="col-sm-9">@Model.RecipientName（@Model.RecipientPhone）</dd>
+
+            <dt class="col-sm-3">地址</dt>
+            <dd class="col-sm-9">@Model.RecipientAddress</dd>
+
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">付款：@Model.PaymentStatus / 出貨：@Model.ShippingStatus / 訂單：@Model.OrderStatus</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="OrderID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary">取消</a>
+</form>

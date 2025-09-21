@@ -31,5 +31,7 @@ namespace FinalExamProject.Models
         public string ShippingStatus { get; set; } = "Pending";
 
         public string OrderStatus { get; set; } = "Active";
+
+        public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 }

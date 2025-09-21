@@ -1,0 +1,44 @@
+﻿@model FinalExamProject.Models.Product
+@{
+    ViewData["Title"] = "商品詳細";
+}
+
+<h4 class="mb-3">商品詳細</h4>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        @if (!string.IsNullOrWhiteSpace(Model.Photo))
+        {
+            <img src="@Model.Photo" class="img-thumbnail" style="width:100%;max-width:320px;object-fit:cover;">
+        }
+        else
+        {
+            <div class="text-muted">無圖片</div>
+        }
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-3">代碼</dt>
+            <dd class="col-sm-9">@Model.ProductCode</dd>
+            <dt class="col-sm-3">名稱</dt>
+            <dd class="col-sm-9">@Model.ProductName</dd>
+            <dt class="col-sm-3">分類</dt>
+            <dd class="col-sm-9">@Model.CategoryInfo?.CategoryName</dd>
+            <dt class="col-sm-3">價格</dt>
+            <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+            <dt class="col-sm-3">狀態</dt>
+            <dd class="col-sm-9">@(Model.IsActive ? "上架" : "下架")</dd>
+            <dt class="col-sm-3">建立</dt>
+            <dd class="col-sm-9">@Model.CreatedDate</dd>
+            <dt class="col-sm-3">更新</dt>
+            <dd class="col-sm-9">@Model.UpdatedDate</dd>
+            <dt class="col-sm-3">描述</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Edit" asp-route-id="@Model.ProductID" class="btn btn-warning">編輯</a>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</div>

@@ -1,0 +1,105 @@
+﻿@model IEnumerable<FinalExamProject.Areas.Admin.Controllers.OrdersController.OrderListItemVm>
+@{
+    ViewData["Title"] = "訂單列表";
+    var q = ViewBag.Q as string;
+    var payment = ViewBag.Payment as string;
+    var shipping = ViewBag.Shipping as string;
+    var status = ViewBag.Status as string;
+    int page = ViewBag.Page ?? 1;
+    int pageSize = ViewBag.PageSize ?? 20;
+    int total = ViewBag.Total ?? 0;
+    int totalPages = (int)Math.Ceiling((double)total / pageSize);
+}
+
+<h2 class="mb-3">訂單列表</h2>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input name="q" value="@q" class="form-control" placeholder="訂單編號 / 會員 / 收件人 / 電話 / 地址">
+    </div>
+    <div class="col-md-2">
+        <select name="payment" class="form-select">
+            <option value="">付款狀態(全部)</option>
+            <option value="Unpaid" selected="@(payment == "Unpaid")">未付款</option>
+            <option value="Paid" selected="@(payment == "Paid")">已付款</option>
+            <option value="Refunded" selected="@(payment == "Refunded")">已退款</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="shipping" class="form-select">
+            <option value="">出貨狀態(全部)</option>
+            <option value="Pending" selected="@(shipping == "Pending")">待出貨</option>
+            <option value="Shipped" selected="@(shipping == "Shipped")">已出貨</option>
+            <option value="Delivered" selected="@(shipping == "Delivered")">已送達</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="status" class="form-select">
+            <option value="">訂單狀態(全部)</option>
+            <option value="Active" selected="@(status == "Active")">有效</option>
+            <option value="Cancelled" selected="@(status == "Cancelled")">已取消</option>
+        </select>
+    </div>
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-primary" type="submit">查詢</button>
+    </div>
+</form>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>會員</th>
+            <th>建立時間</th> @* ← CreatedDate *@
+            <th class="text-end">總金額</th>
+            <th>付款</th>
+            <th>出貨</th>
+            <th>狀態</th>
+            <th style="width:180px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@o.OrderNumber</td>
+                <td>@o.MemberName</td>
+                <td>@o.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                <td class="text-end">@o.TotalAmount.ToString("C")</td>
+                <td>@o.PaymentStatus</td>
+                <td>@o.ShippingStatus</td>
+                <td>@o.OrderStatus</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@o.OrderID" class="btn btn-sm btn-info">詳細</a>
+                    <a asp-action="Edit" asp-route-id="@o.OrderID" class="btn btn-sm btn-warning">編輯</a>
+                    <a asp-action="Delete" asp-route-id="@o.OrderID" class="btn btn-sm btn-danger">刪除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (totalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            @{
+                Func<int, string> pageUrl = p => Url.Action("Index", new { q, payment, shipping, status, page = p, pageSize })!;
+                var start = Math.Max(1, page - 2);
+                var end = Math.Min(totalPages, page + 2);
+            }
+            <li class="page-item @(page == 1 ? "disabled" : "")">
+                <a class="page-link" href="@pageUrl(page - 1)">«</a>
+            </li>
+            @for (var i = start; i <= end; i++)
+            {
+                <li class="page-item @(i == page ? "active" : "")">
+                    <a class="page-link" href="@pageUrl(i)">@i</a>
+                </li>
+            }
+            <li class="page-item @(page == totalPages ? "disabled" : "")">
+                <a class="page-link" href="@pageUrl(page + 1)">»</a>
+            </li>
+        </ul>
+    </nav>
+}

@@ -1,0 +1,115 @@
+﻿@model IEnumerable<FinalExamProject.Models.Product>
+@{
+    ViewData["Title"] = "商品管理";
+    var q = ViewBag.Q as string;
+    int? categoryId = ViewBag.CategoryId as int?;
+    string sort = ViewBag.Sort as string ?? "created_desc";
+    int page = (int)(ViewBag.Page ?? 1);
+    int pageSize = (int)(ViewBag.PageSize ?? 10);
+    int total = (int)(ViewBag.Total ?? 0);
+    int totalPages = (int)(ViewBag.TotalPages ?? 0);
+    var categories = (Microsoft.AspNetCore.Mvc.Rendering.SelectList)ViewBag.Categories;
+}
+
+<h4 class="mb-3">商品管理</h4>
+
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input name="q" value="@q" class="form-control" placeholder="搜尋名稱、代碼、描述" />
+    </div>
+    <div class="col-md-3">
+        <select name="categoryId" class="form-select" asp-items="categories">
+            <option value="">全部分類</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="sort" class="form-select">
+            <option value="created_desc" selected="@(sort == "created_desc")">最新建立</option>
+            <option value="created" selected="@(sort == "created")">最早建立</option>
+            <option value="name" selected="@(sort == "name")">名稱↑</option>
+            <option value="name_desc" selected="@(sort == "name_desc")">名稱↓</option>
+            <option value="price" selected="@(sort == "price")">價格↑</option>
+            <option value="price_desc" selected="@(sort == "price_desc")">價格↓</option>
+        </select>
+    </div>
+    <div class="col-md-2 d-grid">
+        <button class="btn btn-primary" type="submit">查詢</button>
+    </div>
+</form>
+
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">＋ 新增商品</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">沒有符合條件的商品。</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th style="width:80px;">圖片</th>
+                    <th>代碼</th>
+                    <th>名稱</th>
+                    <th>分類</th>
+                    <th class="text-end" style="width:120px;">價格</th>
+                    <th style="width:80px;">狀態</th>
+                    <th style="width:220px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(p.Photo))
+                            {
+                                <img src="@p.Photo" class="img-thumbnail" style="width:64px;height:64px;object-fit:cover;">
+                            }
+                        </td>
+                        <td>@p.ProductCode</td>
+                        <td>@p.ProductName</td>
+                        <td>@p.CategoryInfo?.CategoryName</td>
+                        <td class="text-end">@p.Price.ToString("C")</td>
+                        <td>@(p.IsActive ? "上架" : "下架")</td>
+                        <td>
+                            <a class="btn btn-sm btn-info" asp-action="Details" asp-route-id="@p.ProductID">詳細</a>
+                            <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-id="@p.ProductID">編輯</a>
+                            <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@p.ProductID">刪除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    @if (totalPages > 1)
+    {
+        <nav>
+            <ul class="pagination justify-content-center">
+                @{
+                    Func<int, string> pageUrl = p => Url.Action("Index", new { q = q, categoryId = categoryId, sort = sort, page = p, pageSize = pageSize })!;
+                    int window = 2;
+                    int start = Math.Max(1, page - window);
+                    int end = Math.Min(totalPages, page + window);
+                }
+                <li class="page-item @(page == 1 ? "disabled" : "")">
+                    <a class="page-link" href="@pageUrl(page - 1)">«</a>
+                </li>
+                @for (var i = start; i <= end; i++)
+                {
+                    <li class="page-item @(i == page ? "active" : "")">
+                        <a class="page-link" href="@pageUrl(i)">@i</a>
+                    </li>
+                }
+                <li class="page-item @(page == totalPages ? "disabled" : "")">
+                    <a class="page-link" href="@pageUrl(page + 1)">»</a>
+                </li>
+            </ul>
+            <div class="text-center text-muted small">共 @total 筆，@totalPages 頁</div>
+        </nav>
+    }
+}

@@ -1,0 +1,38 @@
+﻿@model FinalExamProject.Models.Product
+@{
+    ViewData["Title"] = "刪除商品";
+}
+
+<h4 class="text-danger mb-2">刪除商品</h4>
+<p class="text-warning">此操作無法復原，確定要刪除嗎？</p>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-3">
+                @if (!string.IsNullOrWhiteSpace(Model.Photo))
+                {
+                    <img src="@Model.Photo" class="img-thumbnail" style="width:100%;max-width:220px;object-fit:cover;">
+                }
+            </div>
+            <div class="col-md-9">
+                <dl class="row">
+                    <dt class="col-sm-3">代碼</dt>
+                    <dd class="col-sm-9">@Model.ProductCode</dd>
+                    <dt class="col-sm-3">名稱</dt>
+                    <dd class="col-sm-9">@Model.ProductName</dd>
+                    <dt class="col-sm-3">分類</dt>
+                    <dd class="col-sm-9">@Model.CategoryInfo?.CategoryName</dd>
+                    <dt class="col-sm-3">價格</dt>
+                    <dd class="col-sm-9">@Model.Price.ToString("C")</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ProductID" />
+    <button type="submit" class="btn btn-danger">刪除</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">取消</a>
+</form>

@@ -1,0 +1,73 @@
+﻿@model FinalExamProject.Areas.Admin.Controllers.OrdersController.OrderEditVm
+@{
+    ViewData["Title"] = "編輯訂單";
+}
+
+<h2 class="mb-3">編輯訂單</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="OrderID" />
+
+    <div class="mb-3">
+        <label class="form-label">訂單編號</label>
+        <input class="form-control" value="@Model.OrderNumber" disabled />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">建立時間</label>
+        <input class="form-control" value="@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")" disabled />
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="RecipientName" class="form-label"></label>
+            <input asp-for="RecipientName" class="form-control" />
+            <span asp-validation-for="RecipientName" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="RecipientPhone" class="form-label"></label>
+            <input asp-for="RecipientPhone" class="form-control" />
+            <span asp-validation-for="RecipientPhone" class="text-danger"></span>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="PaymentMethod" class="form-label"></label>
+            <input asp-for="PaymentMethod" class="form-control" />
+            <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RecipientAddress" class="form-label"></label>
+        <input asp-for="RecipientAddress" class="form-control" />
+        <span asp-validation-for="RecipientAddress" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="PaymentStatus" class="form-label"></label>
+            <select asp-for="PaymentStatus" class="form-select">
+                <option>Unpaid</option>
+                <option>Paid</option>
+                <option>Refunded</option>
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="ShippingStatus" class="form-label"></label>
+            <select asp-for="ShippingStatus" class="form-select">
+                <option>Pending</option>
+                <option>Shipped</option>
+                <option>Delivered</option>
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="OrderStatus" class="form-label"></label>
+            <select asp-for="OrderStatus" class="form-select">
+                <option>Active</option>
+                <option>Cancelled</option>
+            </select>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">儲存</button>
+    <a asp-action="Index" class="btn btn-secondary">返回</a>
+</form>
