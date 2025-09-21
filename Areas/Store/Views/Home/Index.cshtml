@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "首頁";
+}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container py-5">
+        <h1 class="display-6">歡迎來到 GoShop</h1>
+        <p class="lead mb-0">精選 3C / 家電與更多生活好物，立即逛逛！</p>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">最新上架</h5>
+                <p class="card-text">看看本週新商品。</p>
+                <a class="btn btn-outline-primary" asp-area="Store" asp-controller="Catalog" asp-action="Index" asp-route-sort="new">前往</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">熱銷排行</h5>
+                <p class="card-text">大家都在買什麼？</p>
+                <a class="btn btn-outline-primary" asp-area="Store" asp-controller="Catalog" asp-action="Index" asp-route-sort="hot">前往</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">分類導覽</h5>
+                <p class="card-text">用分類快速找到商品。</p>
+                <a class="btn btn-outline-primary" asp-area="Store" asp-controller="Catalog" asp-action="Index">前往</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a class="btn btn-outline-primary"
+   asp-area="Store" asp-controller="Catalog" asp-action="Index">
+    前往
+</a>

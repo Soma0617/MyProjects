@@ -3,9 +3,11 @@
     ViewData["Title"] = "新增分類";
 }
 
-<h2>新增分類</h2>
+<h2 class="mb-3">新增分類</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" novalidate>
+    @Html.AntiForgeryToken()
+
     <div class="mb-3">
         <label asp-for="CategoryName" class="form-label"></label>
         <input asp-for="CategoryName" class="form-control" />
@@ -14,7 +16,10 @@
 
     <div class="mb-3">
         <label asp-for="CategoryCode" class="form-label"></label>
-        <input asp-for="CategoryCode" class="form-control" maxlength="1" />
+        <input asp-for="CategoryCode" class="form-control"
+               maxlength="10" placeholder="例如：A、ELC、HOME"
+               oninput="this.value=this.value.toUpperCase().replace(/\s+/g,'')" />
+        <div class="form-text">1–10 碼，建議使用大寫英數、不可含空白。</div>
         <span asp-validation-for="CategoryCode" class="text-danger"></span>
     </div>
 

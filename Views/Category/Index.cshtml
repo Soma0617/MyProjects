@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "分類管理";
     var query = ViewBag.Query as FinalExamProject.Models.CategoryQueryVm;
+    var total = (int)(ViewBag.Total ?? 0);
+    var page = (int)(ViewBag.Page ?? 1);
+    var pageSize = (int)(ViewBag.PageSize ?? 10);
+    var totalPages = (int)Math.Ceiling((double)total / pageSize);
 }
 
 <h2>分類列表</h2>
@@ -20,10 +24,10 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-Sort="name">名稱</a>
+                <a asp-action="Index" asp-route-Sort="name" asp-route-Q="@query?.Q">名稱</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-Sort="code">代碼</a>
+                <a asp-action="Index" asp-route-Sort="code" asp-route-Q="@query?.Q">代碼</a>
             </th>
             <th></th>
         </tr>
@@ -43,3 +47,23 @@
         }
     </tbody>
 </table>
+
+@if (totalPages > 1)
+{
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(page == 1 ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-Page="@(page - 1)" asp-route-PageSize="@pageSize" asp-route-Q="@query?.Q" asp-route-Sort="@query?.Sort">上一頁</a>
+            </li>
+            @for (var i = 1; i <= totalPages; i++)
+            {
+                <li class="page-item @(i == page ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-Page="@i" asp-route-PageSize="@pageSize" asp-route-Q="@query?.Q" asp-route-Sort="@query?.Sort">@i</a>
+                </li>
+            }
+            <li class="page-item @(page == totalPages ? "disabled" : "")">
+                <a class="page-link" asp-action="Index" asp-route-Page="@(page + 1)" asp-route-PageSize="@pageSize" asp-route-Q="@query?.Q" asp-route-Sort="@query?.Sort">下一頁</a>
+            </li>
+        </ul>
+    </nav>
+}

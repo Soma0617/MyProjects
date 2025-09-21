@@ -1,0 +1,90 @@
+﻿@model FinalExamProject.Models.AdminDashboardVm
+@{
+    ViewData["Title"] = "後台首頁";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3 class="mb-3">Dashboard</h3>
+
+<div class="row g-3">
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small">商品數</div>
+                <div class="display-6 fw-bold">@Model.ProductCount</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Products" asp-action="Index">管理商品</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small">分類數</div>
+                <div class="display-6 fw-bold">@Model.CategoryCount</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Categories" asp-action="Index">管理分類</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small">訂單數</div>
+                <div class="display-6 fw-bold">@Model.OrderCount</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Orders" asp-action="Index">檢視訂單</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="text-muted small">會員數</div>
+                <div class="display-6 fw-bold">@Model.MemberCount</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Members" asp-action="Index">管理會員</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mt-1">
+    <div class="col-md-3">
+        <div class="card shadow-sm border-warning">
+            <div class="card-body">
+                <div class="text-muted small">低庫存品項</div>
+                <div class="display-6 fw-bold text-warning">@Model.InventoryLowCount</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Inventory" asp-action="Index">庫存管理</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-info">
+            <div class="card-body">
+                <div class="text-muted small">待出貨</div>
+                <div class="display-6 fw-bold text-info">@Model.PendingShipment</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Shipping" asp-action="Index">出貨管理</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-secondary">
+            <div class="card-body">
+                <div class="text-muted small">待付款</div>
+                <div class="display-6 fw-bold text-secondary">@Model.PaymentPending</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Payments" asp-action="Index">付款管理</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card shadow-sm border-primary">
+            <div class="card-body">
+                <div class="text-muted small">報表</div>
+                <div class="display-6 fw-bold">📊</div>
+                <a class="stretched-link" asp-area="Admin" asp-controller="Reports" asp-action="Index">查看報表</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-area="Admin" asp-controller="Products" asp-action="Create" class="btn btn-primary">＋ 新增商品</a>
+    <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="btn btn-outline-secondary ms-2">檢視所有訂單</a>
+</div>
