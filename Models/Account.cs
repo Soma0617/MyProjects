@@ -16,5 +16,9 @@ namespace FinalExamProject.Models
         // ✅ 單一導航屬性
         [ForeignKey("MemberID")]
         public Member MemberInfo { get; set; } = null!;
+
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+
+        public DateTime? LastLoginDate { get; set; } = DateTime.Now;
     }
 }

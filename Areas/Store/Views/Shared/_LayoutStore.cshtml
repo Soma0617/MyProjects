@@ -1,57 +1,109 @@
-﻿@{
-    Layout = null;
-    var title = ViewData["Title"] as string ?? "GoShop";
+﻿@inject IHttpContextAccessor HttpCtx
+@{
+    var title = (ViewData["Title"] as string) ?? "GoShop";
+    var isLogin = !string.IsNullOrEmpty(HttpCtx.HttpContext?.Session.GetString("LOGIN_MEMBER_ID"));
+    var memberName = HttpCtx.HttpContext?.Session.GetString("LOGIN_MEMBER_NAME") ?? "會員";
 }
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
     <meta charset="utf-8" />
-    <title>@title - 前台｜GoShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@title - 前台｜GoShop</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container">
-            <a class="navbar-brand" asp-area="Store" asp-controller="Home" asp-action="Index">GoShop</a>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <header class="border-bottom bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand fw-bold" asp-area="Store" asp-controller="Home" asp-action="Index">GoShop</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#storeNav"
+                        aria-controls="storeNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="storeNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Store" asp-controller="Home" asp-action="Index">首頁</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Store" asp-controller="Catalog" asp-action="Index">瀏覽商品</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Store" asp-controller="Search" asp-action="Index">搜尋/篩選</a>
-                    </li>
-                </ul>
+                <div class="collapse navbar-collapse" id="storeNav">
+                    <!-- Left -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Store" asp-controller="Home" asp-action="Index">首頁</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Store" asp-controller="Catalog" asp-action="Index">瀏覽商品</a>
+                        </li>
+                    </ul>
 
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Store" asp-controller="Account" asp-action="Profile">會員中心</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-sm btn-primary" asp-area="Store" asp-controller="Cart" asp-action="Index">購物車 / 結帳</a>
-                    </li>
-                </ul>
+                    <!-- Right -->
+                    <ul class="navbar-nav align-items-lg-center">
+                        @if (isLogin)
+                        {
+                            <li class="nav-item me-2">
+                                <a class="nav-link" asp-area="Store" asp-controller="Account" asp-action="Profile">
+                                    會員中心（@memberName）
+                                </a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <form asp-area="Store" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-outline-secondary btn-sm">登出</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-2">
+                                <a class="nav-link" asp-area="Store" asp-controller="Account" asp-action="Login">登入</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="btn btn-primary btn-sm" asp-area="Store" asp-controller="Account" asp-action="Register">註冊</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary btn-sm" asp-area="Store" asp-controller="Cart" asp-action="Index">
+                                購物車
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </nav>
     </header>
 
-    <main class="container py-4">
-        <partial name="_Alerts" />
-        @RenderBody()
+    <!-- Alerts -->
+    <div class="container mt-3">
+        @if (TempData["ok"] is string okMsg)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @okMsg
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["err"] is string errMsg)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @errMsg
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+    </div>
+
+    <!-- Main -->
+    <main class="flex-fill">
+        <div class="container py-4">
+            @RenderBody()
+        </div>
     </main>
 
-    <footer class="border-top py-3">
-        <div class="container text-muted small">© @DateTime.Now.Year GoShop</div>
+    <!-- Footer -->
+    <footer class="mt-auto border-top py-3 bg-light">
+        <div class="container text-muted small">
+            © @DateTime.Now.Year GoShop · 前台
+        </div>
     </footer>
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

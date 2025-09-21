@@ -1,0 +1,28 @@
+﻿@model IEnumerable<FinalExamProject.Models.Member>
+@{
+    ViewData["Title"] = "會員管理";
+}
+
+<h2 class="mb-3">會員管理</h2>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>Email</th>
+            <th>手機</th>
+            <th>建立時間</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+            <tr>
+                <td>@m.Name</td>
+                <td>@m.Email</td>
+                <td>@m.Phone</td>
+                <td>@m.CreatedDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>

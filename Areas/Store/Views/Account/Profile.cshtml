@@ -1,0 +1,20 @@
+﻿@model FinalExamProject.Models.Member
+@{
+    ViewData["Title"] = "會員中心";
+}
+<h3>會員中心</h3>
+<dl class="row">
+    <dt class="col-sm-2">姓名</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+    <dt class="col-sm-2">手機</dt>
+    <dd class="col-sm-10">@Model.Phone</dd>
+    <dt class="col-sm-2">地址</dt>
+    <dd class="col-sm-10">@Model.Address</dd>
+</dl>
+
+<form asp-action="Logout" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-outline-secondary">登出</button>
+</form>

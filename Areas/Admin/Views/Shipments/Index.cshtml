@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FinalExamProject.Areas.Admin.Controllers.ShipmentRowVm>
+@{
+    ViewData["Title"] = "出貨管理（待出貨）";
+}
+
+<h2 class="mb-3">出貨管理（待出貨）</h2>
+
+@if (TempData["ok"] != null)
+{
+    <div class="alert alert-success">@TempData["ok"]</div>
+}
+@if (TempData["err"] != null)
+{
+    <div class="alert alert-danger">@TempData["err"]</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">目前沒有待出貨的訂單。</div>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead>
+            <tr>
+                <th>訂單編號</th>
+                <th>下單時間</th>
+                <th>收件人</th>
+                <th>電話</th>
+                <th>地址</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model)
+            {
+                <tr>
+                    <td>@o.OrderNumber</td>
+                    <td>@o.CreatedDate.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@o.RecipientName</td>
+                    <td>@o.RecipientPhone</td>
+                    <td class="text-truncate" style="max-width: 340px;">@o.RecipientAddress</td>
+                    <td class="text-end">
+                        <a asp-action="Ship" asp-route-id="@o.OrderID" class="btn btn-sm btn-primary">出貨</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,43 @@
+﻿@model FinalExamProject.Models.Order
+@{
+    ViewData["Title"] = "訂單已成立";
+    var details = ViewBag.Details as List<FinalExamProject.Models.OrderDetail>;
+}
+<h3 class="mb-3 text-success">訂單已成立</h3>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="mb-1">訂單編號：<strong>@Model.OrderNumber</strong></p>
+        <p class="mb-1">下單時間：@Model.CreatedDate.ToString("yyyy/MM/dd HH:mm")</p>
+        <p class="mb-1">收件人：@Model.RecipientName</p>
+        <p class="mb-0">收件地址：@Model.RecipientAddress</p>
+    </div>
+</div>
+
+@if (details != null && details.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>商品</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>小計</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var d in details)
+            {
+                <tr>
+                    <td>@d.ProductInfo?.ProductName</td>
+                    <td>@d.Quantity</td>
+                    <td>@d.UnitPrice.ToString("C")</td>
+                    <td>@(d.UnitPrice* d.Quantity).ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a class="btn btn-primary" asp-area="Store" asp-controller="Home" asp-action="Index">回到首頁</a>
+<a class="btn btn-outline-primary" asp-area="Store" asp-controller="Catalog" asp-action="Index">繼續逛逛</a>

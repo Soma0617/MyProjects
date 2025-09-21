@@ -27,6 +27,12 @@ namespace FinalExamProject.Migrations
                     b.Property<string>("AccountID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("LastLoginDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("MemberID")
                         .HasColumnType("uniqueidentifier");
 
@@ -581,7 +587,7 @@ namespace FinalExamProject.Migrations
             modelBuilder.Entity("FinalExamProject.Models.OrderDetail", b =>
                 {
                     b.HasOne("FinalExamProject.Models.Order", "OrderInfo")
-                        .WithMany()
+                        .WithMany("OrderDetails")
                         .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -647,6 +653,11 @@ namespace FinalExamProject.Migrations
                         .IsRequired();
 
                     b.Navigation("OrderInfo");
+                });
+
+            modelBuilder.Entity("FinalExamProject.Models.Order", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("FinalExamProject.Models.PurchaseOrder", b =>

@@ -58,7 +58,11 @@ wwwroot\lib\jquery\dist\jquery.js
 wwwroot\lib\jquery\dist\jquery.min.js
 wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
+wwwroot\Pictures\1a0819577c05459689b618aa52c670cd.jpg
 wwwroot\Pictures\20d99213c62e483ca031717ef18a8da6.jpg
+wwwroot\Pictures\48a0403e78e64c3aa00ead22d3a78f51.jpg
+wwwroot\Pictures\8665d97abc2c45d8b4df6ef027bd0dd5.jpg
+wwwroot\Pictures\b1b6b36acc424c9f99b7b2770542cbfd.jpg
 wwwroot\SeedPhoto\筆電1.png
 wwwroot\SeedPhoto\筆電2.png
 wwwroot\SeedPhoto\筆電3.png
